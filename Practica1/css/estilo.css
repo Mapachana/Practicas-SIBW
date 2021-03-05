@@ -6,6 +6,7 @@ body,html{
 
 
 /* Header */
+
 .header{
     height: 20%;
     background-color: #3B3B3B;
@@ -51,4 +52,45 @@ body,html{
 
 .menu li:not(:last-child){
     border-right:1px solid rgb(255, 255, 255);
+}
+
+/* Footer */
+
+.footer{
+    height: 30%;
+    background-color: #3B3B3B;
+    text-align: center;
+    padding: 20px;
+    color: rgb(255, 255, 255);
+}
+
+/* Container */
+
+.container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;    
+    flex: 1;
+    justify-content: center;
+}
+
+/* Barra lateral */
+
+.barra{
+    width: 20%;
+    background-color: rgb(59, 59, 59);
+}
+
+.barra ul li{
+    list-style: none;
+}
+
+.barra ul li a{
+    color: rgb(255, 255, 255);
+}
+
+/* Content */
+
+.content{
+    width: 80%;
 }
