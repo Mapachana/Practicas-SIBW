@@ -1,0 +1,54 @@
+body,html{
+    height: 100%;
+	margin:0 auto;
+    padding: 0 auto;
+}
+
+
+/* Header */
+.header{
+    height: 20%;
+    background-color: #3B3B3B;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; 
+    justify-content: space-evenly;
+}
+
+.logo{
+    background-image: url("../img/dice.png");
+    width: 100px;;
+    height: 100px;
+    background-size: cover;
+    margin: 10px;
+    margin-top: 15px;
+}
+
+.texthead{
+    flex: 3.0;
+}
+
+.title{
+    color:rgb(255, 255, 255);
+    font-size: 1.3em;
+    text-align: center;
+}
+
+.menu{
+    list-style: none;
+    text-align: center;
+}
+
+.menu li{
+    display: inline;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.menu li a{
+    color:rgb(255, 255, 255);
+}
+
+.menu li:not(:last-child){
+    border-right:1px solid rgb(255, 255, 255);
+}
