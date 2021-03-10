@@ -112,3 +112,41 @@ img{
     max-width: 100%;
     height: auto;
 }
+
+/* Content-evento */
+
+.content-evento{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.info-evento{
+    flex: 3;
+    padding: 3%;
+}
+
+.fotos-evento{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.img-evento{
+    flex: 1;
+}
+
+.enlaces a{
+    color:black;
+}
+
+.botones-sociales button{
+    border: none;
+    background-color:  #3B3B3B;
+    color:rgb(255, 255, 255);
+    margin: 2%;
+    padding: 1%;
+    cursor: pointer;
+}
