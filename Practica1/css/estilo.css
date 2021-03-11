@@ -7,8 +7,8 @@ body,html{
 
 /* Header */
 
-.header{
-    height: 20%;
+header{
+    height: 9em;
     background-color: #3B3B3B;
     display: flex;
     flex-direction: row;
@@ -17,17 +17,16 @@ body,html{
 }
 
 .logo{
-    background-image: url("../img/dice.png");
-    width: 8%;
-    min-width: 100px;
-    min-height: 100px;
-    background-size: cover;
-    margin: 1%;
-    margin-top: 1%;
+    flex: 1;
+}
+
+.logo img{
+    max-height: 100%;
+    width: auto;
 }
 
 .texthead{
-    flex: 3.0;
+    flex: 4.0;
 }
 
 .title{
@@ -57,8 +56,8 @@ body,html{
 
 /* Footer */
 
-.footer{
-    height: 30%;
+footer{
+    height: 12em;
     background-color: #3B3B3B;
     text-align: center;
     padding: 2%;
@@ -77,16 +76,16 @@ body,html{
 
 /* Barra lateral */
 
-.barra{
+aside{
     width: 20%;
     background-color: rgb(59, 59, 59);
 }
 
-.barra ul li{
+aside ul li{
     list-style: none;
 }
 
-.barra ul li a{
+aside ul li a{
     color: rgb(255, 255, 255);
 }
 
