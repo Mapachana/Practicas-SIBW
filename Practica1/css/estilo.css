@@ -2,6 +2,7 @@ body,html{
     height: 100%;
 	margin:0 auto;
     padding: 0 auto;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 
@@ -44,6 +45,8 @@ header{
     display: inline;
     padding-left: 5%;
     padding-right: 5%;
+
+    transition: all 0.1s linear;
 }
 
 .menu li a{
@@ -54,6 +57,16 @@ header{
     border-right:1px solid rgb(255, 255, 255);
 }
 
+
+
+
+
+
+
+.menu li:hover{
+    background-color:#6b6b6b; 
+    transition: all 0.1s linear; 
+}
 /* Footer */
 
 footer{
@@ -83,10 +96,20 @@ aside{
 
 aside ul li{
     list-style: none;
+    border-bottom: 1px solid rgb(211, 211, 211);
+    padding-bottom: 1em;
+    padding-top: 1em;
+
+    transition: all 0.1s linear;
 }
 
 aside ul li a{
     color: rgb(255, 255, 255);
+}
+
+aside ul li:hover{
+    background-color:#6b6b6b; 
+    transition: all 0.1s linear; 
 }
 
 /* Content */
