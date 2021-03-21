@@ -193,7 +193,12 @@ img{
     color: black;
 }
 
+#enviar-comentario{
+    margin-top: 1em;
+}
+
 form{
+    margin-top: 1em;
     max-width: 100%;
 }
 
