@@ -5,6 +5,7 @@
     <meta name="author" content="Mapachana">
     <title>Pagina</title>
     <link rel="stylesheet" href="../css/estilo.css">
+    <script type="text/javascript" src="../java/javascript.js" defer></script>
 </head>
 
 <body>
@@ -68,6 +69,7 @@
                     <button onclick="window.location.href='http://twitter.com';">Twitter</button>
                     <button onclick="window.location.href='http://facebook.com';">Facebook</button>
                     <button onclick="window.location.href='./evento_imprimir.html';">Imprimir</button>
+                    <button id="boton-comentarios">Comentarios</button>
                 </div>
             </div>
 
@@ -85,7 +87,7 @@
 
         </div>
 
-        <div class="barra-comentarios">
+        <div class="barra-comentarios", id="apartado-comentarios">
             <div class="comentarios-evento">
                 <div class ="comentario">
                     <h3>Autor Fecha Hora</h3>
@@ -100,9 +102,19 @@
     
             <div class="nuevo-comentario">
                 <form>
-                    Nombre
+                    Nombre:
                     <input type="text" id="nombre">
                 </form>
+                <form>
+                    Email:
+                    <input type="text" id="email">
+                </form>
+                <form>
+                    Texto:
+                    <input type="text" id="texto-comentario">
+                </form>
+
+                <button id="enviar-comentario">Enviar</button>
             </div>
     </div>
 
@@ -114,6 +126,18 @@
         <p>© Copyright</p>
         <p>Mapachana</p>
     </footer>
+
+    <!-- Dialogo modal -->
+
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="error-modal"> Error </p>
+        </div>
+        
+    </div>
     
 
 </body>
