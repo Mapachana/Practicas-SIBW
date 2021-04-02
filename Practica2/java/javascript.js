@@ -8,12 +8,12 @@ document.getElementById("boton-comentarios").onclick = ver_comentarios;
 
 /* Función para enviar un comentario */
 
-
-
 function submit_comentario(){
     var nombre = document.getElementById("nombre");
     var email = document.getElementById("email");
     var texto = document.getElementById("texto-comentario");
+
+    var campos_rellenos = true;
     
     var fecha = Date();
     var regex_correo = /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,4}$/; // Expresión regular con la que comparar el correo
@@ -21,20 +21,54 @@ function submit_comentario(){
     if (nombre.value == ""){
         document.getElementById("error-modal").innerHTML = "El nombre no debe ser vacío";
         document.getElementById("myModal").style.display = "block";
+
+        campos_rellenos = false;
     }
 
     if (! regex_correo.test(email.value)){
         document.getElementById("error-modal").innerHTML = "El email no es válido " + email.value;
         document.getElementById("myModal").style.display = "block";
+
+        campos_rellenos = false;
     }
 
     if (texto.value == ""){
         document.getElementById("error-modal").innerHTML = "El texto no debe ser vacío";
         document.getElementById("myModal").style.display = "block";
+
+        campos_rellenos = false;
+    }
+
+    if (campos_rellenos){
+        var m = new Date();
+        var dateString = m.getFullYear() +"/"+ (m.getMonth()+1) +"/"+ m.getDate() + " " + m.getHours() + ":" + m.getMinutes();
+
+        document.getElementById("seccion-comentarios").insertAdjacentHTML("beforeend", "<div class=\"comentario\">" + "<h4>" + nombre.value + " " + dateString + "</h4>" + "<p>" + texto.value + "</p>" + "</div>");
     }
 }
 
 document.getElementById("enviar-comentario").onclick = submit_comentario;
+
+/* Funcion para corregir palabras */
+
+function reemplazar_palabras(){
+    var palabras = [/caca/g, /uwu/g, /tonto/g, /idiota/g];
+    var palabras_corregidas = ["****", "***", "*****", "******"];
+
+    var texto = document.getElementById("texto-comentario").value;
+
+    var texto_corregido = texto;
+
+    var i;
+    for (i = 0; i < palabras.length; i++){
+        texto_corregido = texto_corregido.replace(palabras[i], palabras_corregidas[i]);
+    }
+
+    document.getElementById("texto-comentario").value = texto_corregido;
+}
+
+document.getElementById("texto-comentario").onchange = reemplazar_palabras;
+document.getElementById("texto-comentario").onkeypress = reemplazar_palabras;
 
 /* Funciones del diálogo modal */
 
