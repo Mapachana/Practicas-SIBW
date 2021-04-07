@@ -26,7 +26,7 @@ function submit_comentario(){
     }
 
     if (! regex_correo.test(email.value)){
-        document.getElementById("error-modal").innerHTML = "El email no es válido " + email.value;
+        document.getElementById("error-modal").innerHTML = "El email no es válido";
         document.getElementById("myModal").style.display = "block";
 
         campos_rellenos = false;
