@@ -1,0 +1,248 @@
+body,html{
+    height: 100%;
+	margin:0 auto;
+    padding: 0 auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* Header */
+
+header{
+    height: 9em;
+    background-color: #3B3B3B;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; 
+    justify-content: space-evenly;
+}
+
+.logo{
+    flex: 1;
+}
+
+.logo img{
+    max-height: 100%;
+    width: auto;
+}
+
+.texthead{
+    flex: 4.0;
+}
+
+.title{
+    color:rgb(255, 255, 255);
+    font-size: 1.3em;
+    text-align: center;
+}
+
+.menu{
+    list-style: none;
+    text-align: center;
+}
+
+.menu li{
+    display: inline;
+    padding-left: 5%;
+    padding-right: 5%;
+
+    transition: all 0.1s linear;
+}
+
+.menu li a{
+    color:rgb(255, 255, 255);
+}
+
+.menu li:not(:last-child){
+    border-right:1px solid rgb(255, 255, 255);
+}
+
+
+
+
+
+
+
+.menu li:hover{
+    background-color:#6b6b6b; 
+    transition: all 0.1s linear; 
+}
+/* Footer */
+
+footer{
+    height: 12em;
+    background-color: #3B3B3B;
+    text-align: center;
+    padding: 2%;
+    color: rgb(255, 255, 255);
+}
+
+/* Container */
+
+.container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;    
+    flex: 1;
+    justify-content: left;
+}
+
+/* Barra lateral */
+
+aside{
+    width: 20%;
+    background-color: rgb(59, 59, 59);
+}
+
+aside ul li{
+    list-style: none;
+    border-bottom: 1px solid rgb(211, 211, 211);
+    padding-bottom: 1em;
+    padding-top: 1em;
+
+    transition: all 0.1s linear;
+}
+
+aside ul li a{
+    color: rgb(255, 255, 255);
+}
+
+aside ul li:hover{
+    background-color:#6b6b6b; 
+    transition: all 0.1s linear; 
+}
+
+/* Content */
+
+.content{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.evento{
+    text-align: center;
+    flex: 1;
+    width: 33%;
+    height: auto;
+    min-width: 30%;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+/* Content-evento */
+
+.content-evento{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.info-evento{
+    flex: 3;
+    padding: 3%;
+}
+
+.fotos-evento{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.img-evento{
+    flex: 1;
+}
+
+.enlaces a{
+    color:black;
+}
+
+.botones-sociales button{
+    border: none;
+    background-color:  #3B3B3B;
+    color:rgb(255, 255, 255);
+    margin: 2%;
+    padding: 1%;
+    cursor: pointer;
+}
+
+/* Barra-comentarios */
+
+.barra-comentarios{
+    width: 20%;
+    display: none;
+}
+
+.barra-comentarios-activa{
+    width: 20%;
+    display: initial;
+    background-color: #3B3B3B;
+    padding: 1em;
+    color: white;
+}
+
+.comentario{
+    background-color: white;
+    color: black;
+}
+
+#enviar-comentario{
+    margin-top: 1em;
+}
+
+form{
+    margin-top: 1em;
+    max-width: 100%;
+}
+
+input{
+    max-width: 100%;
+}
+
+/* Modal */
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+

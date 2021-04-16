@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Mapachana">
+    <title>Pagina</title>
+    <link rel="stylesheet" href="../css/estilo.css">
+    <script type="text/javascript" src="../java/javascript.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="../img/dice.png">
+        </div>
+
+        <div class="texthead">
+            <div class="title">
+                <h1>Título</h1>
+            </div>
+
+            <ul class="menu">
+                <li>
+                    <a href="portada.html">Inicio</a>
+                </li>
+                <li><a href="portada.html">Menu 2</a></li>
+                <li><a href="portada.html">Menu 3</a></li>
+            </ul>
+
+        </div>
+
+    </header>
+
+    <div class="container">
+        <aside>
+            <ul>
+                <li>
+                    <a href="portada.html">Enlace de interes</a>
+                </li>
+                <li>
+                    <a href="portada.html">Enlace de interes</a>
+                </li>
+                <li>
+                    <a href="portada.html">Enlace de interes</a>
+                </li>
+            </ul>
+        </aside>
+
+        <div class="content-evento">
+            <div class="info-evento">
+                <h2>Evento</h2>
+                <h3>Organizador</h3>
+                <h5>Fecha y hora</h5>
+                <p>
+                    La posición de Washington hacia las elecciones en Palestina ha sido coherente. Las elecciones fueron postergadas hasta la muerte de Yasser Arafat, que fue recibida como una oportunidad para la realización de la "visión" de Bush sobre un eventual Estado palestino democrativo, que es una palido y vago reflejo del consenso internacional sobre una acuerdo de dos entidades estatales en la zona, que Estados Unidos viene bloqueando desde hace 30 años....
+                </p>
+                <p>
+                    El compromiso formal de Hamas de "destruir Israel" lo pone a la par con Estados Unidos e Israel, que prometieron por mucho tiempo que no habria ningun "Estado palestino adicional" (aparte de Jordania", hasta que ambas naciones aflojaron parcialmente su posicion, para aceptar un mini Estado constituido por los fragmentos que queden despues que Israel se apropie de todas las partes de Palestina que desea....
+                </p>
+                <p>
+                    Simplemente como conjetura, imagine el lector una inversion de las circunstancias: que Hamas permitiese a los israelies vivir en cantones desparramados e invariables, virtualmente separados unos de otros, y en alguna pequeña parte de Jerusalen, mientras los palestinos construyen enormes asentamientos y proyectos de infraestructura para apoderarse de las tierras y los recursos de Israel, Y que, ademas Hamas acepte llamar a esos fragmentos "un Estado". Si se hicieran propuestas para esta empobrecida "categoria de Estado", nosotros nos sentiriamos, con razon, horrorizados. Pero con ese tipo de propuestas, la posicion de Hamas seria esencialmente igual a la de Estados Unidos e Israel.
+                </p>
+
+                <div class="enlaces">
+                    <a href="https://formacion-docente.idoneos.com/didactica_de_la_lengua/tipos_de_textos/ejemplos_de_textos/">Enlace textos</a>
+                </div>
+
+                <div class="botones-sociales">
+                    <button onclick="window.location.href='http://twitter.com';">Twitter</button>
+                    <button onclick="window.location.href='http://facebook.com';">Facebook</button>
+                    <button onclick="window.location.href='./evento_imprimir.html';">Imprimir</button>
+                    <button id="boton-comentarios">Comentarios</button>
+                </div>
+            </div>
+
+            <div class="fotos-evento">
+                <div class="img-evento">
+                    <img src="../img/dice.png">
+                    <p>Pie de foto</p>
+                </div>
+                <div class="img-evento">
+                    <img src="../img/dice.png">
+                    <p>Pie de foto</p>
+                </div>
+
+             </div>
+
+        </div>
+
+        <div class="barra-comentarios", id="apartado-comentarios">
+            <div class="comentarios-evento", id="seccion-comentarios">
+                <div class ="comentario">
+                    <h4>Autor Fecha Hora</h4>
+                    <p>Comentario</p>
+                </div>
+    
+                <div class ="comentario">
+                    <h4>Autor Fecha Hora</h4>
+                    <p>Comentario</p>
+                </div>
+            </div>
+    
+            <div class="nuevo-comentario">
+                <form>
+                    Nombre:
+                    <input type="text" id="nombre">
+                </form>
+                <form>
+                    Email:
+                    <input type="text" id="email">
+                </form>
+                <form>
+                    Texto:
+                    <input type="text" id="texto-comentario">
+                </form>
+
+                <button id="enviar-comentario">Enviar</button>
+            </div>
+    </div>
+
+    
+    </div>
+
+    <footer>
+        <p>Pie</p>
+        <p>© Copyright</p>
+        <p>Mapachana</p>
+    </footer>
+
+    <!-- Dialogo modal -->
+
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="error-modal"> Error </p>
+        </div>
+        
+    </div>
+    
+
+</body>
+
+
+</html>
