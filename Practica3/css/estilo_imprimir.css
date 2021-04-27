@@ -159,3 +159,7 @@ img{
     cursor: pointer;
     display: none;
 }
+
+.barra-comentarios{
+    display: none;
+}

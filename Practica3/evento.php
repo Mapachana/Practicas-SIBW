@@ -5,15 +5,13 @@
     $twig = new \Twig\Environment($loader);
 
     $nombreEvento = "Nombre por defecto";
-    $fechaEvento = "Fecha por defecto"; 
+    $fechaEvento = "Fecha por defecto";
 
-    if($_GET['ev'] == 1){
-        $nombreEvento = "Nombre 1";
-        $fechaEvento = "Fecha 1";
+    if(isset($_GET['ev'])){
+        $idEV = $_GET['ev'];
     }
     else{
-        $nombreEvento = "Nombre 2";
-        $fechaEvento = "Fecha 2";
+        $idEV = -1;
     }
 
     echo $twig->render('evento.html', ['nombre' => $nombreEvento, 'fecha' => $fechaEvento]);
