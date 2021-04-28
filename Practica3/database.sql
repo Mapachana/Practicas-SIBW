@@ -19,15 +19,17 @@ CREATE TABLE Evento(
   lugar VARCHAR(100) NOT NULL,
   descripcion TEXT NOT NULL,
   organizador VARCHAR(100) NOT NULL,
-  fecha DATE,
+  fecha DATETIME,
   PRIMARY KEY(id)
 );
 
 /* Tabla de Imagenes */
 CREATE TABLE Imagenes(
-  id VARCHAR(100),
+  id INT AUTO_INCREMENT,
+  ruta VARCHAR(100),
   evento INT NOT NULL,
   extImagen VARCHAR(10) NOT NULL,
+  pie VARCHAR(50),
   PRIMARY KEY(id),
   FOREIGN KEY(evento) REFERENCES Evento(id)
 );
@@ -39,7 +41,7 @@ CREATE TABLE Comentario(
   evento INT NOT NULL,
   autor VARCHAR(100) NOT NULL,
   comentario VARCHAR(300),
-  fecha DATE,
+  fecha DATETIME,
   PRIMARY KEY(id),
   FOREIGN KEY(evento) REFERENCES Evento(id)
 );
@@ -51,13 +53,16 @@ CREATE TABLE PalabrasProhibidas(
 
 /* Añadimos algunos elementos por defecto */
 
-INSERT INTO Evento(titulo, lugar, descripcion, organizador, fecha) VALUES('Partida de DyD','Sotano de Dani','Comenzamos nueva campaña de dyd con Dani como master. Hay pizza!', 'Dani', NOW());
+INSERT INTO Evento(titulo, lugar, descripcion, organizador, fecha) VALUES('Partida de DyD','Sótano de Dani','Comenzamos nueva campaña de dyd con Dani como master. Hay pizza!', 'Dani', NOW());
 INSERT INTO Evento(titulo, lugar, descripcion, organizador, fecha) VALUES('Partida de Vampiro','Discord','Nos acercamos al final de la campaña de vampiro la mascarada', 'Greevilr', NOW());
+INSERT INTO Evento(titulo, lugar, descripcion, organizador, fecha) VALUES('Nuevo rol','Discord','Abrimos campaña de vampiro!! Hay vacantes', 'Santi', NOW());
 
+INSERT INTO Imagenes(ruta, evento, extImagen, pie) VALUES('../img/dice', 1,'png', 'un dado apañao');
+INSERT INTO Imagenes(ruta, evento, extImagen, pie) VALUES('../img/dice3', 1,'png', 'un dado rojo');
+INSERT INTO Imagenes(ruta, evento, extImagen, pie) VALUES('../img/dice2', 2,'png', 'un dadito rojo');
+INSERT INTO Imagenes(ruta, evento, extImagen, pie) VALUES('../img/myryama', 2,'png', 'Myriam y Yama');
+INSERT INTO Imagenes(ruta, evento, extImagen, pie) VALUES('../img/anya', 3,'png', 'Anya, Lasombra');
 
-
-INSERT INTO Imagenes(id, evento, extImagen) VALUES('../img/dice', 1,'png');
-INSERT INTO Imagenes(id, evento, extImagen) VALUES('../img/dice2', 2,'png');
 
 INSERT INTO Comentario(evento, autor, comentario, fecha) VALUES(1, 'Pipe', 'oleee', NOW());
 INSERT INTO Comentario(evento, autor, comentario, fecha) VALUES(2, 'Blue', 'vamos a morir', NOW());

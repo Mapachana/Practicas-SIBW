@@ -4,23 +4,26 @@
     <title>Evento</title>
     <link rel="stylesheet" href="../css/estilo.css">
     <script type="text/javascript" src="../java/javascript.js" defer></script>
+
+    <!-- Meto palabras prohibidas-->
+    <script>
+        var palabras_prohibidas = [];
+        {% for palabra in lista_palabras %}
+            palabras_prohibidas.push({{palabra.palabra| json_encode | raw}});
+        {% endfor %}
+    </script>
 {% endblock %}
 
 {% block contenido %}
     <div class="content-evento">
         <div class="info-evento">
-            <h2>{{ nombre }}</h2>
-            <h3>Organizador</h3>
-            <h5>{{ fecha }}</h5>
+            <h2>{{ evento.titulo }}</h2>
+            <h3>{{ evento.organizador }}</h3>
+            <h5>{{ evento.fecha }} {{ evento.lugar }}</h5>
             <p>
-                La posición de Washington hacia las elecciones en Palestina ha sido coherente. Las elecciones fueron postergadas hasta la muerte de Yasser Arafat, que fue recibida como una oportunidad para la realización de la "visión" de Bush sobre un eventual Estado palestino democrativo, que es una palido y vago reflejo del consenso internacional sobre una acuerdo de dos entidades estatales en la zona, que Estados Unidos viene bloqueando desde hace 30 años....
+                {{ evento.descripcion }}
             </p>
-            <p>
-                El compromiso formal de Hamas de "destruir Israel" lo pone a la par con Estados Unidos e Israel, que prometieron por mucho tiempo que no habria ningun "Estado palestino adicional" (aparte de Jordania", hasta que ambas naciones aflojaron parcialmente su posicion, para aceptar un mini Estado constituido por los fragmentos que queden despues que Israel se apropie de todas las partes de Palestina que desea....
-            </p>
-            <p>
-                Simplemente como conjetura, imagine el lector una inversion de las circunstancias: que Hamas permitiese a los israelies vivir en cantones desparramados e invariables, virtualmente separados unos de otros, y en alguna pequeña parte de Jerusalen, mientras los palestinos construyen enormes asentamientos y proyectos de infraestructura para apoderarse de las tierras y los recursos de Israel, Y que, ademas Hamas acepte llamar a esos fragmentos "un Estado". Si se hicieran propuestas para esta empobrecida "categoria de Estado", nosotros nos sentiriamos, con razon, horrorizados. Pero con ese tipo de propuestas, la posicion de Hamas seria esencialmente igual a la de Estados Unidos e Israel.
-            </p>
+
 
             <div class="enlaces">
                 <a href="https://formacion-docente.idoneos.com/didactica_de_la_lengua/tipos_de_textos/ejemplos_de_textos/">Enlace textos</a>
@@ -29,20 +32,20 @@
             <div class="botones-sociales">
                 <button onclick="window.location.href='http://twitter.com';">Twitter</button>
                 <button onclick="window.location.href='http://facebook.com';">Facebook</button>
-                <button onclick="window.location.href='./evento_imprimir.php';">Imprimir</button>
+                <button onclick="window.location.href='./evento_imprimir.php?ev={{ idEvento }}';">Imprimir</button>
                 <button id="boton-comentarios">Comentarios</button>
             </div>
         </div>
 
         <div class="fotos-evento">
+            {% for imagen in lista_imagenes %}
             <div class="img-evento">
-                <img src="./img/dice.png">
-                <p>Pie de foto</p>
+                <img src={{ imagen.ruta }}.{{ imagen.extension }}>
+                <p>{{ imagen.pie }}</p>
             </div>
-            <div class="img-evento">
-                <img src="./img/dice.png">
-                <p>Pie de foto</p>
-            </div>
+            {% endfor %}
+
+            
 
             </div>
 
@@ -50,16 +53,15 @@
 
     <div class="barra-comentarios", id="apartado-comentarios">
         <div class="comentarios-evento", id="seccion-comentarios">
+            {% for coment in lista_comentarios %}
             <div class ="comentario">
-                <h4>Autor Fecha Hora</h4>
-                <p>Comentario</p>
+                <h4>{{ coment.autor }} {{ coment.fecha }}</h4>
+                <p>{{ coment.comentario }}</p>
             </div>
+            {% endfor %}
 
-            <div class ="comentario">
-                <h4>Autor Fecha Hora</h4>
-                <p>Comentario</p>
-            </div>
         </div>
+       
 
         <div class="nuevo-comentario">
             <form>
@@ -77,6 +79,18 @@
 
             <button id="enviar-comentario">Enviar</button>
         </div>
+    </div>
+
+    <!-- Dialogo modal -->
+
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="error-modal"> Error </p>
+        </div>
+        
     </div>
 
     

@@ -1,11 +1,9 @@
 <?php
     require_once "/usr/local/lib/php/vendor/autoload.php";
+    include("modelo.php");
 
     $loader = new \Twig\Loader\FilesystemLoader('templates');
     $twig = new \Twig\Environment($loader);
-
-    $nombreEvento = "Nombre por defecto";
-    $fechaEvento = "Fecha por defecto";
 
     if(isset($_GET['ev'])){
         $idEV = $_GET['ev'];
@@ -14,5 +12,12 @@
         $idEV = -1;
     }
 
-    echo $twig->render('evento.html', ['nombre' => $nombreEvento, 'fecha' => $fechaEvento]);
+    $database=Database::getInstance();
+
+    $evento = $database->getEvento($idEV);
+    $lista_imagenes = $database->getFotosEvento($idEV);
+    $lista_comentarios = $database->getComentariosEvento($idEV);
+    $lista_palabras = $database->getPalabrasProhibidas();
+
+    echo $twig->render('evento.html', ['idEvento' => $idEV, 'evento' => $evento, 'lista_imagenes' => $lista_imagenes, 'lista_comentarios' => $lista_comentarios, 'lista_palabras' => $lista_palabras]);
 ?>

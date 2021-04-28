@@ -41,7 +41,7 @@ function submit_comentario(){
 
     if (campos_rellenos){
         var m = new Date();
-        var dateString = m.getFullYear() +"/"+ (m.getMonth()+1) +"/"+ m.getDate() + " " + m.getHours() + ":" + m.getMinutes();
+        var dateString = m.getFullYear() +"-"+ (m.getMonth()+1) +"-"+ m.getDate() + " " + m.getHours() + ":" + m.getMinutes() + ":" + m.getSeconds();
 
         document.getElementById("seccion-comentarios").insertAdjacentHTML("beforeend", "<div class=\"comentario\">" + "<h4>" + nombre.value + " " + dateString + "</h4>" + "<p>" + texto.value + "</p>" + "</div>");
     }
@@ -52,8 +52,22 @@ document.getElementById("enviar-comentario").onclick = submit_comentario;
 /* Funcion para corregir palabras */
 
 function reemplazar_palabras(){
-    var palabras = [/caca/g, /uwu/g, /tonto/g, /idiota/g];
-    var palabras_corregidas = ["****", "***", "*****", "******"];
+
+    var i;
+    var palabras = [];
+    var palabras_corregidas = [];
+
+    // Creo el array de palabras corregidas con la longitud necesaria
+    for(var j = 0; j < palabras_prohibidas.length; j++)
+        palabras_corregidas[j] = "";
+
+    // Creo las palabras prohibidas con sintaxis para el replace y añado los asteriscos a las corregidas
+    for(i = 0; i < palabras_prohibidas.length; i++){
+        palabras.push(new RegExp(palabras_prohibidas[i], 'g'));
+        for(var j = 0; j < palabras_prohibidas[i].length; j++){
+            palabras_corregidas[i] = palabras_corregidas[i].concat("*");
+        }
+    }
 
     var texto = document.getElementById("texto-comentario").value;
 
