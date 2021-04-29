@@ -5,7 +5,7 @@
     $loader = new \Twig\Loader\FilesystemLoader('templates');
     $twig = new \Twig\Environment($loader);
 
-    if(isset($_GET['ev'])){
+    if(isset($_GET['ev']) && is_numeric($_GET['ev']) ){
         $idEV = $_GET['ev'];
     }
     else{
@@ -19,5 +19,5 @@
     $lista_comentarios = $database->getComentariosEvento($idEV);
     $lista_palabras = $database->getPalabrasProhibidas();
 
-    echo $twig->render('evento.html', ['idEvento' => $idEV, 'evento' => $evento, 'lista_imagenes' => $lista_imagenes, 'lista_comentarios' => $lista_comentarios, 'lista_palabras' => $lista_palabras]);
+    echo $twig->render('evento.html', ['evento' => $evento, 'lista_imagenes' => $lista_imagenes, 'lista_comentarios' => $lista_comentarios, 'lista_palabras' => $lista_palabras]);
 ?>

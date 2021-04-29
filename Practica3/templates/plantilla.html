@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Mapachana">
+    <link rel="icon" type="image/png" href="./img/favicon.png"/>
+    {% block informacion %}
+    <title>Pagina</title>
+    <link rel="stylesheet" href="./css/estilo.css">
+    {% endblock %}
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="./img/dice.png">
+        </div>
+
+        <div class="texthead">
+            <div class="title">
+                <h1>Asociación de rol</h1>
+            </div>
+
+            <ul class="menu">
+                <li>
+                    <a href="index.php">Inicio</a>
+                </li>
+                <li><a href="index.php">Menu 2</a></li>
+                <li><a href="index.php">Menu 3</a></li>
+            </ul>
+
+        </div>
+
+    </header>
+
+    <div class="container">
+        <aside>
+            <ul>
+                <li>
+                    <a href="index.php">Enlace de interes</a>
+                </li>
+                <li>
+                    <a href="index.php">Enlace de interes</a>
+                </li>
+                <li>
+                    <a href="index.php">Enlace de interes</a>
+                </li>
+            </ul>
+        </aside>
+
+        
+
+        {% block contenido %}
+
+        {% endblock %}
+
+        
+    </div>
+
+    <footer>
+        <p>Pie</p>
+        <p>© Copyright</p>
+        <p>Mapachana</p>
+    </footer>
+    
+
+</body>
+
+
+</html>

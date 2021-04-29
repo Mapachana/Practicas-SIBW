@@ -1,15 +1,17 @@
-{% extends "padre.html" %}
+{% extends "plantilla.html" %}
 
 {% block informacion %}
     <title>Evento</title>
-    <link rel="stylesheet" href="../css/estilo.css">
-    <script type="text/javascript" src="../java/javascript.js" defer></script>
+    <link rel="stylesheet" href="./css/estilo.css">
+    <script type="text/javascript" src="./java/javascript.js" defer></script>
 
-    <!-- Meto palabras prohibidas-->
+    <!-- Meto palabras prohibidas
+        Sé que no es una buena practica usar variables globales ni mezclar script con html, pero no encontré otra forma
+        de hacerlo que entendiera y funcionara-->
     <script>
         var palabras_prohibidas = [];
         {% for palabra in lista_palabras %}
-            palabras_prohibidas.push({{palabra.palabra| json_encode | raw}});
+            palabras_prohibidas.push({{ palabra.palabra| json_encode | raw }});
         {% endfor %}
     </script>
 {% endblock %}
@@ -24,15 +26,17 @@
                 {{ evento.descripcion }}
             </p>
 
-
+            <!-- Añade el enlace si y solo si evento.enlace no esta vacio-->
+            {% if evento.enlace %}
             <div class="enlaces">
-                <a href="https://formacion-docente.idoneos.com/didactica_de_la_lengua/tipos_de_textos/ejemplos_de_textos/">Enlace textos</a>
+                <a href={{ evento.enlace }}>Visita este enlace para saber mas</a>
             </div>
+            {% endif %}
 
             <div class="botones-sociales">
                 <button onclick="window.location.href='http://twitter.com';">Twitter</button>
                 <button onclick="window.location.href='http://facebook.com';">Facebook</button>
-                <button onclick="window.location.href='./evento_imprimir.php?ev={{ idEvento }}';">Imprimir</button>
+                <button onclick="window.location.href='./evento_imprimir.php?ev={{ evento.id }}';">Imprimir</button>
                 <button id="boton-comentarios">Comentarios</button>
             </div>
         </div>
@@ -40,7 +44,7 @@
         <div class="fotos-evento">
             {% for imagen in lista_imagenes %}
             <div class="img-evento">
-                <img src={{ imagen.ruta }}.{{ imagen.extension }}>
+                <img src={{ imagen.ruta }}>
                 <p>{{ imagen.pie }}</p>
             </div>
             {% endfor %}

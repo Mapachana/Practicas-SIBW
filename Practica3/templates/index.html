@@ -1,8 +1,8 @@
-{% extends "padre.html" %}
+{% extends "plantilla.html" %}
 
 {% block informacion %}
     <title>Portada</title>
-    <link rel="stylesheet" href="../css/estilo.css">
+    <link rel="stylesheet" href="./css/estilo.css">
 {% endblock %}
 
 {% block contenido %}
@@ -11,7 +11,7 @@
         {% for event in lista_eventos %}
             <div class="evento">
                 <a href="evento.php?ev={{ event.id }}">
-                    <img src={{ event.ruta }}.{{ event.extension }}>
+                    <img src={{ event.foto_portada }}>
                     <h3>{{ event.titulo }}</h3>
                 </a>
             </div>

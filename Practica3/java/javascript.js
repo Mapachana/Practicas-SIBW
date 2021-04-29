@@ -55,27 +55,18 @@ function reemplazar_palabras(){
 
     var i;
     var palabras = [];
-    var palabras_corregidas = [];
 
-    // Creo el array de palabras corregidas con la longitud necesaria
-    for(var j = 0; j < palabras_prohibidas.length; j++)
-        palabras_corregidas[j] = "";
-
-    // Creo las palabras prohibidas con sintaxis para el replace y añado los asteriscos a las corregidas
+    // Creo las palabras prohibidas con sintaxis para el replace
     for(i = 0; i < palabras_prohibidas.length; i++){
         palabras.push(new RegExp(palabras_prohibidas[i], 'g'));
-        for(var j = 0; j < palabras_prohibidas[i].length; j++){
-            palabras_corregidas[i] = palabras_corregidas[i].concat("*");
-        }
     }
 
     var texto = document.getElementById("texto-comentario").value;
 
     var texto_corregido = texto;
 
-    var i;
     for (i = 0; i < palabras.length; i++){
-        texto_corregido = texto_corregido.replace(palabras[i], palabras_corregidas[i]);
+        texto_corregido = texto_corregido.replace(palabras[i], "*".repeat(palabras_prohibidas[i].length));
     }
 
     document.getElementById("texto-comentario").value = texto_corregido;
