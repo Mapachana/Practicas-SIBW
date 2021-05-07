@@ -1,0 +1,101 @@
+{% extends "plantilla.html" %}
+
+{% block informacion %}
+    <title>Evento</title>
+    <link rel="stylesheet" href="./css/estilo.css">
+    <script type="text/javascript" src="./java/javascript.js" defer></script>
+
+    <!-- Meto palabras prohibidas
+        Sé que no es una buena practica usar variables globales ni mezclar script con html, pero no encontré otra forma
+        de hacerlo que entendiera y funcionara-->
+    <script>
+        var palabras_prohibidas = [];
+        {% for palabra in lista_palabras %}
+            palabras_prohibidas.push({{ palabra.palabra| json_encode | raw }});
+        {% endfor %}
+    </script>
+{% endblock %}
+
+{% block contenido %}
+    <div class="content-evento">
+        <div class="info-evento">
+            <h2>{{ evento.titulo }}</h2>
+            <h3>{{ evento.organizador }}</h3>
+            <h5>{{ evento.fecha }} {{ evento.lugar }}</h5>
+            <p>
+                {{ evento.descripcion }}
+            </p>
+
+            <!-- Añade el enlace si y solo si evento.enlace no esta vacio-->
+            {% if evento.enlace %}
+            <div class="enlaces">
+                <a href={{ evento.enlace }}>Visita este enlace para saber mas</a>
+            </div>
+            {% endif %}
+
+            <div class="botones-sociales">
+                <button onclick="window.location.href='http://twitter.com';">Twitter</button>
+                <button onclick="window.location.href='http://facebook.com';">Facebook</button>
+                <button onclick="window.location.href='./evento_imprimir.php?ev={{ evento.id }}';">Imprimir</button>
+                <button id="boton-comentarios">Comentarios</button>
+            </div>
+        </div>
+
+        <div class="fotos-evento">
+            {% for imagen in lista_imagenes %}
+            <div class="img-evento">
+                <img src={{ imagen.ruta }}>
+                <p>{{ imagen.pie }}</p>
+            </div>
+            {% endfor %}
+
+            
+
+            </div>
+
+    </div>
+
+    <div class="barra-comentarios", id="apartado-comentarios">
+        <div class="comentarios-evento", id="seccion-comentarios">
+            {% for coment in lista_comentarios %}
+            <div class ="comentario">
+                <h4>{{ coment.autor }} {{ coment.fecha }}</h4>
+                <p>{{ coment.comentario }}</p>
+            </div>
+            {% endfor %}
+
+        </div>
+       
+
+        <div class="nuevo-comentario">
+            <form>
+                Nombre:
+                <input type="text" id="nombre">
+            </form>
+            <form>
+                Email:
+                <input type="text" id="email">
+            </form>
+            <form>
+                Texto:
+                <input type="text" id="texto-comentario">
+            </form>
+
+            <button id="enviar-comentario">Enviar</button>
+        </div>
+    </div>
+
+    <!-- Dialogo modal -->
+
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="error-modal"> Error </p>
+        </div>
+        
+    </div>
+
+    
+   {% endblock %}

@@ -1,0 +1,23 @@
+{% extends "plantilla.html" %}
+
+{% block informacion %}
+    <title>Login</title>
+    <link rel="stylesheet" href="./css/estilo.css">
+{% endblock %}
+
+  {% block contenido %}
+
+    <div class="perfil">
+      <form action="perfil.php" method="post">
+        Nick:<br>
+        <input type="text" name="nick" /><br>
+        Email:<br>
+        <input type="email" name="email" /><br>
+        Password:<br>
+        <input type="password" name="contraseña" /><br>
+        <input type="submit" value="Cambiar datos" />
+      </form>
+    </div>
+
+  {% endblock %}
+
