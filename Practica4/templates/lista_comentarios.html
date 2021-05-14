@@ -1,0 +1,22 @@
+{% extends "plantilla.html" %}
+
+{% block informacion %}
+    <title>Portada</title>
+    <link rel="stylesheet" href="./css/estilo.css">
+{% endblock %}
+
+{% block contenido %}
+    <div class="lista_comentarios">
+
+        {% for coment in lista_comentarios %}
+            <div class="comentario-en-lista">
+                <a href="editar_comentario.php?cm={{ coment.id }}">
+                    <h4>{{ coment.autor }} {{ coment.fecha }}</h4>
+                    <p>{{ coment.comentario }}</p>
+                </a>
+            </div>
+        {% endfor %}
+        
+    </div>
+{% endblock %}
+           

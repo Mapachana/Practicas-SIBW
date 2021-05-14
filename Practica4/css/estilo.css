@@ -207,6 +207,13 @@ input{
     max-width: 100%;
 }
 
+.editar-comentario{
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    max-width: 20%;
+}
+
 /* Modal */
 
 .modal {
@@ -262,5 +269,32 @@ input{
 }
 
 .perfil input{
+    margin-bottom: 1em;
+}
+
+/* Lista de comentarios */
+
+.lista-comentarios{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
+
+.comentario-en-lista{
+    padding: 1em;
+    border-bottom:1px solid rgb(59, 59, 59);
+    width: 100%;
+}
+
+/* Editar comentarirrroo */
+
+
+.comentario-editar{
+    padding: 3em;
+    width: 100%;
+}
+
+.comentario-editar input{
     margin-bottom: 1em;
 }

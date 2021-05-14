@@ -1,0 +1,26 @@
+{% extends "plantilla.html" %}
+
+{% block informacion %}
+    <title>Login</title>
+    <link rel="stylesheet" href="./css/estilo.css">
+{% endblock %}
+
+  {% block contenido %}
+
+    <div class="login">
+      <form action="cambiar_roles.php" method="post">
+        Nombre de usuario:<br>
+        <input type="text" name="username" /><br>
+        Rol actual:  <br>
+        Rol nuevo:<br>
+        <select multiple name="rol">    
+        <option value="registrado">registrado</option>
+        <option value="moderador">moderador</option>
+        <option value="gestor">gestor</option>
+        <option value="superusuario">superusuario</option>
+        <input type="submit" value="Cambiar datos" />
+      </form>
+    </div>
+
+  {% endblock %}
+

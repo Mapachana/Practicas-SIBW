@@ -9,12 +9,12 @@
 
     <div class="perfil">
       <form action="perfil.php" method="post">
-        Nick:<br>
-        <input type="text" name="nick" /><br>
-        Email:<br>
-        <input type="email" name="email" /><br>
-        Password:<br>
-        <input type="password" name="contraseña" /><br>
+        Nick: <br>
+        <input type="text" name="nick", value={{ user.username }} /><br>
+        Email: <br>
+        <input type="email" name="email", value={{ user.email }} /><br>
+        Password: Debe introducir la antigua para cambiar otros datos o la nueva<br>
+        <input type="password" name="contraseña"/><br>
         <input type="submit" value="Cambiar datos" />
       </form>
     </div>

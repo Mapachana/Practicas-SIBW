@@ -57,6 +57,20 @@
                     <li>
                         <a href="logout.php">Logout</a>
                     </li>
+
+                    {% if user.rol == 'moderador' or user.rol == 'gestor' or user.rol == 'superusuario' %}
+                        <li>
+                            <a href="lista_comentarios.php">Lista de Comentarios</a>
+                        </li>
+
+                        {% if user.rol == 'superusuario' %}
+                        <li>
+                            <a href="cambiar_roles.php">Cambiar roles</a>
+                        </li>
+
+                    {% endif %}
+
+                    {% endif %}
                 {% endif %}
 
 

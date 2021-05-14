@@ -12,12 +12,22 @@
         $idEV = -1;
     }
 
+    $variablesParaTwig = [];
+
     $database=Database::getInstance();
 
-    $evento = $database->getEvento($idEV);
-    $lista_imagenes = $database->getFotosEvento($idEV);
-    $lista_comentarios = $database->getComentariosEvento($idEV);
-    $lista_palabras = $database->getPalabrasProhibidas();
+    $variablesParaTwig['evento'] = $database->getEvento($idEV);
+    $variablesParaTwig['lista_imagenes'] = $database->getFotosEvento($idEV);
+    $variablesParaTwig['lista_comentarios'] = $database->getComentariosEvento($idEV);
+    $variablesParaTwig['lista_palabras'] = $database->getPalabrasProhibidas();
 
-    echo $twig->render('evento.html', ['evento' => $evento, 'lista_imagenes' => $lista_imagenes, 'lista_comentarios' => $lista_comentarios, 'lista_palabras' => $lista_palabras]);
+  
+    session_start();
+    
+    if (isset($_SESSION['nickUsuario'])) {
+        $variablesParaTwig['user'] = $database->getUser($_SESSION['nickUsuario']);
+    }
+
+
+    echo $twig->render('evento.html', $variablesParaTwig);
 ?>

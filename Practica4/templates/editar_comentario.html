@@ -1,0 +1,23 @@
+{% extends "plantilla.html" %}
+
+{% block informacion %}
+    <title>Login</title>
+    <link rel="stylesheet" href="./css/estilo.css">
+{% endblock %}
+
+  {% block contenido %}
+
+  <div class ="comentario-editar">
+    <h4>{{ comentario.autor }} {{ comentario.fecha }}</h4>
+    <form action="editar_comentario.php?cm={{ comentario.id }}" method="post">
+      Texto del comentario: <br>
+      <input type="text" name="texto", value="{{ comentario.comentario }}" /><br>
+
+      <input type="submit" value="Editar comentario" />
+    </form>
+  </div>
+
+    
+
+  {% endblock %}
+

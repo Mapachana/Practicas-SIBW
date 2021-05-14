@@ -61,12 +61,30 @@
             <div class ="comentario">
                 <h4>{{ coment.autor }} {{ coment.fecha }}</h4>
                 <p>{{ coment.comentario }}</p>
+
+
+                {% if coment.editado %}
+                <p><br>Comentario editado</p>
+                {% endif %}
+
+                {% if user.rol == 'moderador' or user.rol == 'gestor' or user.rol == 'superusuario' %}
+                <div class="editar-comentario">
+                    <a href="editar_comentario.php?cm={{ coment.id }}">
+                        <img src="./img/edit-button.png">
+                    </a>
+                    <a href="borrar_comentario.php?cm={{ coment.id }}">
+                        <img src="./img/delete.png">
+                    </a>
+                </div>
+
+                {% endif %}
             </div>
             {% endfor %}
 
         </div>
        
 
+        {% if user %}
         <div class="nuevo-comentario">
             <form>
                 Nombre:
@@ -83,6 +101,7 @@
 
             <button id="enviar-comentario">Enviar</button>
         </div>
+        {% endif %}
     </div>
 
     <!-- Dialogo modal -->

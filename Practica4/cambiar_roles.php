@@ -7,27 +7,26 @@
 
 
     $database=Database::getInstance();
-
-    $variablesParaTwig = [];
   
     session_start();
+
+    $variablesParaTwig = [];
     
     if (isset($_SESSION['nickUsuario'])) {
         $variablesParaTwig['user'] = $database->getUser($_SESSION['nickUsuario']);
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      $nick = $_POST['nick'];
-      $email = $_POST['email'];
-      $pass = $_POST['contraseña'];
+      $username = $_POST['username'];
+      $rol = $_POST['rol'];
 
-      // Actualizo el user
-      $database->actualizarUser($_SESSION['nickUsuario'], $nick, $email, password_hash($pass, PASSWORD_DEFAULT));
-
-      // Actualizo el user
-      $variablesParaTwig['user'] = $database->getUser($nick);
-
+      // Compruebo si al usuario le puedo quitar el rol de superusuario en caso de ser superusuario
+    if ($database->quitarSuperusuario($username)){
+      $database->actualizarRol($username, $rol);
     }
 
-      echo $twig->render('perfil.html', $variablesParaTwig);
+      header("Location: index.php");
+    }
+
+      echo $twig->render('cambiar_roles.html', $variablesParaTwig);
     ?>

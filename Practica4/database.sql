@@ -49,6 +49,7 @@ CREATE TABLE Comentario(
   autor VARCHAR(100) NOT NULL,
   comentario VARCHAR(300),
   fecha DATETIME,
+  editado BOOLEAN,
   PRIMARY KEY(id),
   FOREIGN KEY(evento) REFERENCES Evento(id)
 );
@@ -64,6 +65,7 @@ CREATE TABLE Usuario(
   username VARCHAR(50),
   email VARCHAR(100) UNIQUE NOT NULL,
   passw VARCHAR(100) NOT NULL,
+  rol ENUM('registrado', 'moderador', 'gestor', 'superusuario') NOT NULL,
   PRIMARY KEY(username)
 );
 
@@ -79,9 +81,9 @@ INSERT INTO Imagenes(ruta, evento, pie) VALUES('./img/dice2.png', 2, 'un dadito 
 INSERT INTO Imagenes(ruta, evento, pie) VALUES('./img/myryama.png', 2, 'Myriam y Yama');
 INSERT INTO Imagenes(ruta, evento, pie) VALUES('./img/anya.png', 3, 'Anya, Lasombra');
 
-INSERT INTO Comentario(evento, autor, comentario, fecha) VALUES(1, 'Pipe', 'oleee', NOW());
-INSERT INTO Comentario(evento, autor, comentario, fecha) VALUES(2, 'Blue', 'vamos a morir', NOW());
-INSERT INTO Comentario(evento, autor, comentario, fecha) VALUES(2, 'Nalli', 'Ñam ñam', NOW());
+INSERT INTO Comentario(evento, autor, comentario, fecha, editado) VALUES(1, 'Pipe', 'oleee', NOW(), false);
+INSERT INTO Comentario(evento, autor, comentario, fecha, editado) VALUES(2, 'Blue', 'vamos a morir', NOW(), false);
+INSERT INTO Comentario(evento, autor, comentario, fecha, editado) VALUES(2, 'Nalli', 'Ñam ñam', NOW(), false);
 
 INSERT INTO PalabrasProhibidas(palabra) VALUES('caca');
 INSERT INTO PalabrasProhibidas(palabra) VALUES('uwu');
@@ -90,8 +92,12 @@ INSERT INTO PalabrasProhibidas(palabra) VALUES('idiota');
 INSERT INTO PalabrasProhibidas(palabra) VALUES('hatsunemiku');
 
 /* Contraseña sibw */
-INSERT INTO Usuario(email, username, passw) VALUES ('ana@ugr.es', 'ana', '$2y$10$kQZF8UnXpwjbkjW5HLMUdejyiGW7NVOEO3ebPyzXWLnPhq0fySEvW');
+INSERT INTO Usuario(email, username, passw, rol) VALUES ('ana@ugr.es', 'ana', '$2y$10$kQZF8UnXpwjbkjW5HLMUdejyiGW7NVOEO3ebPyzXWLnPhq0fySEvW', 'superusuario');
 /* Contraseña cthulhu */
-INSERT INTO Usuario(email, username, passw) VALUES ('greevil@ugr.es', 'greevil', '$2y$10$ICJhbYj7Msik5z98P8yrROp5JCG.JCT7YHBeK3ZJ1DCl3iNfLz.ba');
+INSERT INTO Usuario(email, username, passw, rol) VALUES ('greevil@ugr.es', 'greevil', '$2y$10$ICJhbYj7Msik5z98P8yrROp5JCG.JCT7YHBeK3ZJ1DCl3iNfLz.ba', 'moderador');
 /* Contraseña vampiro */
-INSERT INTO Usuario(email, username, passw) VALUES ('blue@ugr.es', 'blue', '$2y$10$L83GeRza9pY7lkGt8R9DN.6ulJ0CVBanxkXudTLnWfu3Ptqij1Ypa');
+INSERT INTO Usuario(email, username, passw, rol) VALUES ('blue@ugr.es', 'blue', '$2y$10$L83GeRza9pY7lkGt8R9DN.6ulJ0CVBanxkXudTLnWfu3Ptqij1Ypa', 'registrado');
+/* Contraseña vampiro */
+INSERT INTO Usuario(email, username, passw, rol) VALUES ('nalli@ugr.es', 'nalli', '$2y$10$L83GeRza9pY7lkGt8R9DN.6ulJ0CVBanxkXudTLnWfu3Ptqij1Ypa', 'gestor');
+/* Contraseña vampiro */
+INSERT INTO Usuario(email, username, passw, rol) VALUES ('aaa@ugr.es', 'aaa', '$2y$10$L83GeRza9pY7lkGt8R9DN.6ulJ0CVBanxkXudTLnWfu3Ptqij1Ypa', 'superusuario');
