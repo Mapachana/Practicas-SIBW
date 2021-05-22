@@ -63,12 +63,24 @@
                             <a href="lista_comentarios.php">Lista de Comentarios</a>
                         </li>
 
-                        {% if user.rol == 'superusuario' %}
-                        <li>
-                            <a href="cambiar_roles.php">Cambiar roles</a>
-                        </li>
+                        {% if user.rol == 'gestor' or user.rol == 'superusuario' %}
 
-                    {% endif %}
+                            <li>
+                                <a href="add_evento.php">Añadir evento</a>
+                            </li>
+
+                            <li>
+                                <a href="lista_eventos.php">Lista de Eventos</a>
+                            </li>
+
+                            {% if user.rol == 'superusuario' %}
+                            <li>
+                                <a href="cambiar_roles.php">Cambiar roles</a>
+                            </li>
+
+                            {% endif %}
+
+                        {% endif %}
 
                     {% endif %}
                 {% endif %}

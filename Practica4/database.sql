@@ -29,6 +29,7 @@ CREATE TABLE Evento(
   foto_portada VARCHAR(100) NOT NULL,
   enlace VARCHAR(100),
   fecha DATETIME,
+  etiquetas VARCHAR(100),
   PRIMARY KEY(id)
 );
 
@@ -39,7 +40,7 @@ CREATE TABLE Imagenes(
   evento INT NOT NULL,
   pie VARCHAR(50),
   PRIMARY KEY(id),
-  FOREIGN KEY(evento) REFERENCES Evento(id)
+  FOREIGN KEY(evento) REFERENCES Evento(id) ON DELETE CASCADE
 );
 
 /* Tabla de comentarios */
@@ -51,7 +52,7 @@ CREATE TABLE Comentario(
   fecha DATETIME,
   editado BOOLEAN,
   PRIMARY KEY(id),
-  FOREIGN KEY(evento) REFERENCES Evento(id)
+  FOREIGN KEY(evento) REFERENCES Evento(id) ON DELETE CASCADE
 );
 
 /* Tabla de palabras prohibidas */

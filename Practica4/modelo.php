@@ -25,7 +25,7 @@
         }
 
         /* Funcion para obtener un evento por su identificador 
-           Devuelve un array con: id, titulo, lugar, descripcion, organizador, fecha, enlace */
+           Devuelve un array con: id, titulo, lugar, descripcion, organizador, fecha, enlace, etiquetas */
         public function getEvento($idEv){
             $consulta = "SELECT * FROM Evento WHERE id=?";
             /* stmt representa una consulta lista */
@@ -35,15 +35,94 @@
             $res=$stmt->get_result();
             $stmt->close();
         
-            $evento = array('id' => '-1', 'titulo' => '¡Ups! Este evento no existe :(', 'lugar' => 'XXX', 'descripcion' => 'XXX', 'organizador' => 'XXX', 'fecha' => 'XXX', 'enlace' => '');
+            $evento = array('id' => '-1', 'titulo' => '¡Ups! Este evento no existe :(', 'lugar' => 'XXX', 'descripcion' => 'XXX', 'organizador' => 'XXX', 'fecha' => 'XXX', 'enlace' => '', 'etiquetas' => '');
             
             if ($res->num_rows > 0) {
                 $row = $res->fetch_assoc();
                 
-                $evento = array('id' => $row['id'], 'titulo' => $row['titulo'], 'lugar' => $row['lugar'], 'descripcion' => $row['descripcion'], 'organizador' => $row['organizador'], 'fecha' => $row['fecha'], 'enlace' => $row['enlace']);
+                $evento = array('id' => $row['id'], 'titulo' => $row['titulo'], 'lugar' => $row['lugar'], 'descripcion' => $row['descripcion'], 'organizador' => $row['organizador'], 'fecha' => $row['fecha'], 'enlace' => $row['enlace'], 'etiquetas' => $row['etiquetas']);
             }
             
             return $evento;
+        }
+
+        /* Funcion para añadir un evento nuevo
+            Devuelve el resultado del evento*/
+        public function addEvento($titulo, $organizador, $fecha, $lugar, $descripcion, $enlace, $etiquetas, $file_name){
+            $consulta = "INSERT INTO Evento (titulo, organizador, fecha, lugar, descripcion, enlace, etiquetas, foto_portada) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            /* stmt representa una consulta lista */
+            $ruta_imagen = "./img/".$file_name;
+            $stmt = $this->$mysqli->prepare($consulta);
+            $stmt->bind_param("ssssssss", $titulo, $organizador, $fecha, $lugar, $descripcion, $enlace, $etiquetas, $ruta_imagen);
+            $stmt->execute();
+            $res=$stmt->get_result();
+
+            if($stmt->affected_rows != -1){
+                $res = array('resultado' => TRUE, 'id' => $this->$mysqli->insert_id);
+            }
+            else{
+                $res = array('resultado' => FALSE, 'id' => -1);
+            }
+
+            $stmt->close();
+    
+            return $res;
+        }
+
+         /* Funcion para añadir un evento nuevo
+            Devuelve el resultado del evento*/
+        public function updateEvento($id, $titulo, $organizador, $fecha, $lugar, $descripcion, $enlace, $etiquetas, $file_name){
+            $consulta = "UPDATE Evento SET titulo=?, organizador=?, fecha=?, lugar=?, descripcion=?, enlace=?, etiquetas=?, foto_portada=? WHERE id=?";
+            /* stmt representa una consulta lista */
+            $ruta_imagen = "./img/".$file_name;
+            $stmt = $this->$mysqli->prepare($consulta);
+            $stmt->bind_param("sssssssss", $titulo, $organizador, $fecha, $lugar, $descripcion, $enlace, $etiquetas, $ruta_imagen, $id);
+            $stmt->execute();
+            $res=$stmt->get_result();
+
+            if($stmt->affected_rows != -1){
+                $res = TRUE;
+            }
+            else{
+                $res = FALSE;
+            }
+
+            $stmt->close();
+    
+            return $res;
+        }
+
+        /* Funcion para borrar un evento */
+        public function borrarEvento($id){
+            $consulta = "DELETE FROM Evento WHERE id=?";
+            /* stmt representa una consulta lista */
+            $stmt = $this->$mysqli->prepare($consulta);
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $res=$stmt->get_result();
+            $stmt->close();
+        }
+
+        /* Funcion para añadir fotos a un evento */
+        public function addImagenEvento($id, $foto){
+            $consulta = "INSERT INTO Imagenes (ruta, evento) VALUES (?, ?)";
+            /* stmt representa una consulta lista */
+            $ruta_imagen = "./img/".$foto;
+            $stmt = $this->$mysqli->prepare($consulta);
+            $stmt->bind_param("si", $ruta_imagen, $id);
+            $stmt->execute();
+            $res=$stmt->get_result();
+
+            if($stmt->affected_rows != -1){
+                $res = true;
+            }
+            else{
+                $res = false;
+            }
+
+            $stmt->close();
+    
+            return $res;
         }
 
         /* Funcion para obtener las fotos de un evento
@@ -67,6 +146,16 @@
             }
             
             return $lista_imagenes;
+        }
+        /* Funcion para borrar todas las fotos asociadas a un evento */
+        public function borrarImagenesEvento($id){
+            $consulta = "DELETE FROM Imagenes WHERE evento=?";
+            /* stmt representa una consulta lista */
+            $stmt = $this->$mysqli->prepare($consulta);
+            $stmt->bind_param("i",$id);
+            $stmt->execute();
+            $res=$stmt->get_result();
+            $stmt->close();
         }
 
         /* Funcion para obtener los comentarios de un evento 

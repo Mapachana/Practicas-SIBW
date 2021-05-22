@@ -1,0 +1,72 @@
+{% extends "plantilla.html" %}
+
+{% block informacion %}
+    <title>Login</title>
+    <link rel="stylesheet" href="./css/estilo.css">
+{% endblock %}
+
+  {% block contenido %}
+
+  
+
+    <div class="add-evento">
+        <div id="error-add-evento">
+            {% for e in errores %}
+                <p>{{e}}</p>
+            {% endfor %}
+
+            {% if resultado == "insertado" %}
+                <p>¡Evento añadido!</p>
+                <a href="index.php">Vuelve a la página principal</a>
+            {% elseif resultado == "error" %}
+                <p>Ha ocurrido un error, comprueba los datos introducidos</p>
+            {% endif %}
+        </div>
+        
+        <form action="add_evento.php" method="post" enctype="multipart/form-data">
+            Titulo: <br>
+            <input type="text" name="titulo" /><br>
+            Organizador: <br>
+            <input type="text" name="organizador" /><br>
+            Fecha en formato YYYY-MM-DD HH:MM:SS: <br>
+            <input type="text" name="fecha" /><br>
+            Lugar: <br>
+            <input type="text" name="lugar" /><br>
+            Descripcion: <br>
+            <input type="text" name="descr" /><br>
+            Enlace: <br>
+            <input type="text" name="enlace" /><br>
+            Etiquetas: <br>
+            <input type="text" name="etiquetas" /><br>
+            Imagen principal: <br> 
+            <input type="file" name="imagen" /><br>
+            Imagen: <br> 
+            <input type="file" name="imagenes[]" multiple="multiple"/><br>
+
+            <input type="submit" value="Añadir evento" />
+          </form>
+
+        <div id="imagen-subir">
+            {% if imagen %}
+                <img src="{{imagen}}" />
+            {% endif %}
+        </div>
+
+    </div>
+    
+    <!--{% if imagen %}
+      <p>La imagen está guardada en <a href="{{imagen}}">{{imagen}}</a>.</p> 
+      <img src="{{imagen}}" />
+    {% else %}
+      {# FUNDAMENTAL AÑADIR  enctype="multipart/form-data" a la etiqueta <form> #}
+      
+      <form action="add_evento.php" method="post" enctype="multipart/form-data">
+        Imagen a subir: <input type="file" name="imagen" /><br>
+        <input type="submit" value="Mandar imagen" />
+      </form>
+    {% endif %}-->
+
+    
+
+  {% endblock %}
+

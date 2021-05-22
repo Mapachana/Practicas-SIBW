@@ -39,6 +39,18 @@
                 <button onclick="window.location.href='./evento_imprimir.php?ev={{ evento.id }}';">Imprimir</button>
                 <button id="boton-comentarios">Comentarios</button>
             </div>
+
+            {% if user.rol == 'gestor' or user.rol == 'superusuario' %}
+                <div class="editar-comentario">
+                    <a href="editar_evento.php?ev={{ evento.id }}">
+                        <img src="./img/edit-button.png">
+                    </a>
+                    <a href="borrar_evento.php?ev={{ evento.id }}">
+                        <img src="./img/delete.png">
+                    </a>
+                </div>
+
+            {% endif %}
         </div>
 
         <div class="fotos-evento">
