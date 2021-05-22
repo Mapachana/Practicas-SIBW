@@ -21,11 +21,13 @@
       
         $variablesParaTwig['evento'] = $database->getEvento($idEV);
     }
-    $variablesParaTwig['lista_eventos'] = $database->getListaEventos();
+    
 
-    $database->borrarEvento($idEV);
+    if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+        $database->borrarEvento($idEV);
 
-    header("Location: index.php");
+        header("Location: index.php");
+    }
 
-      echo $twig->render('index.html', $variablesParaTwig);
+      echo $twig->render('borrar_evento.html', $variablesParaTwig);
     ?>

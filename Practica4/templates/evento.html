@@ -33,6 +33,12 @@
             </div>
             {% endif %}
 
+            {% if evento.etiquetas %}
+                <div class="etiquetas">
+                    {{ evento.etiquetas }}
+                </div>
+            {% endif %}
+
             <div class="botones-sociales">
                 <button onclick="window.location.href='http://twitter.com';">Twitter</button>
                 <button onclick="window.location.href='http://facebook.com';">Facebook</button>
@@ -41,7 +47,7 @@
             </div>
 
             {% if user.rol == 'gestor' or user.rol == 'superusuario' %}
-                <div class="editar-comentario">
+                <div class="evento-editar">
                     <a href="editar_evento.php?ev={{ evento.id }}">
                         <img src="./img/edit-button.png">
                     </a>

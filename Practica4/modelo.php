@@ -342,6 +342,29 @@
             return $row;
           }
 
+          /* Funcion para añadir un nuevo usuario */
+          function addUser($nick, $email, $pass){
+            $consulta = "INSERT INTO Usuario (username, email, passw, rol) VALUES (?, ?, ?, 'registrado')";
+            /* stmt representa una consulta lista */
+            $stmt = $this->$mysqli->prepare($consulta);
+            $cifrada = password_hash($pass, PASSWORD_DEFAULT);
+            $stmt->bind_param("sss", $nick, $email, $cifrada);
+            $stmt->execute();
+            $res=$stmt->get_result();
+
+
+            if($stmt->affected_rows != -1){
+                $res = TRUE;
+            }
+            else{
+                $res = FALSE;
+            }
+
+            $stmt->close();
+    
+            return $res;
+          }
+
           /* Funcion para actualizar un usuario por su username */
           function actualizarUser($actuser, $nick, $email, $pass) {
             $consulta = "UPDATE Usuario SET username=?, email=?, passw=? WHERE username=?";

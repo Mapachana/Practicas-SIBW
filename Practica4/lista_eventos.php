@@ -10,7 +10,7 @@
 
     $variablesParaTwig = [];
 
-    $variablesParaTwig['lista_comentarios'] = $database->getListaComentarios();
+    $variablesParaTwig['lista_eventos'] = $database->getListaEventos();
   
     session_start();
     
@@ -18,5 +18,5 @@
         $variablesParaTwig['user'] = $database->getUser($_SESSION['nickUsuario']);
     }
 
-    echo $twig->render('lista_comentarios.html', $variablesParaTwig);
+    echo $twig->render('lista_eventos.html', $variablesParaTwig);
 ?>

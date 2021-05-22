@@ -160,6 +160,11 @@ img{
     display: none;
 }
 
+.etiquetas{
+    display: none;
+    color:blue;
+}
+
 .barra-comentarios{
     display: none;
 }

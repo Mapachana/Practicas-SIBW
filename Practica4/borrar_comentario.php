@@ -23,9 +23,11 @@
         $evento = $variablesParaTwig['comentario']['evento'];
     }
 
-    $database->borrarComentario($idCm);
+    if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+        $database->borrarComentario($idCm);
 
-    header("Location: evento.php?ev=$evento");
+        header("Location: evento.php?ev=$evento");
+    }
 
-      echo $twig->render('evento.html', $variablesParaTwig);
+      echo $twig->render('borrar_comentario.html', $variablesParaTwig);
     ?>

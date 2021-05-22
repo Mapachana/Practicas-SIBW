@@ -42,7 +42,7 @@
             Imagen: <br> 
             <input type="file" name="imagenes[]" multiple="multiple"/><br>
 
-            <input type="submit" value="Añadir evento" />
+            <input type="submit" value="Editar evento" />
           </form>
 
         <div id="imagen-subir">
@@ -52,20 +52,6 @@
         </div>
 
     </div>
-    
-    <!--{% if imagen %}
-      <p>La imagen está guardada en <a href="{{imagen}}">{{imagen}}</a>.</p> 
-      <img src="{{imagen}}" />
-    {% else %}
-      {# FUNDAMENTAL AÑADIR  enctype="multipart/form-data" a la etiqueta <form> #}
-      
-      <form action="add_evento.php" method="post" enctype="multipart/form-data">
-        Imagen a subir: <input type="file" name="imagen" /><br>
-        <input type="submit" value="Mandar imagen" />
-      </form>
-    {% endif %}-->
-
-    
 
   {% endblock %}
 
