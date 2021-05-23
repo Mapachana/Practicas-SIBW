@@ -28,6 +28,16 @@
         $variablesParaTwig['user'] = $database->getUser($_SESSION['nickUsuario']);
     }
 
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $texto = $_POST['texto'];
+
+        if($texto != ""){
+            $database->addComentario($idEV, $variablesParaTwig['user']['username'], $variablesParaTwig['user']['email'], $texto);
+            header("Location: evento.php?ev=$idEV");
+        }
+        
+    }
+
 
     echo $twig->render('evento.html', $variablesParaTwig);
 ?>

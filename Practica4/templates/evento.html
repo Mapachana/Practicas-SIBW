@@ -104,20 +104,17 @@
 
         {% if user %}
         <div class="nuevo-comentario">
-            <form>
-                Nombre:
-                <input type="text" id="nombre">
-            </form>
-            <form>
-                Email:
-                <input type="text" id="email">
-            </form>
-            <form>
-                Texto:
-                <input type="text" id="texto-comentario">
+            <form action="evento.php?ev={{ evento.id }}" method="post">
+                <!--Nombre: <br>
+                <input type="text" id="nombre", value="{{ user.username }}">
+                Email: <br>
+                <input type="text" id="email", value="{{ user.email }}">-->
+                Texto: <br>
+                <input type="text" id="texto-comentario" name="texto">
+                <input type="submit" value="Enviar" id="enviar-comentario" />
             </form>
 
-            <button id="enviar-comentario">Enviar</button>
+            <!--<button id="enviar-comentario">Enviar</button>-->
         </div>
         {% endif %}
     </div>

@@ -299,6 +299,28 @@ input{
     width: 100%;
 }
 
+* /*Lista de comentarios */
+
+.lista-eventos{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
+
+.evento-en-lista{
+    display: flex;
+    flex-direction: row;
+    padding: 1em;
+    border-bottom:1px solid rgb(59, 59, 59);
+    width: 100%;
+}
+
+.evento-en-lista a{
+    max-width: 20%;
+    margin: 1em;
+}
+
 /* Editar comentario */
 
 

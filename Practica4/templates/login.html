@@ -8,6 +8,12 @@
   {% block contenido %}
 
     <div class="login">
+      <div id="error-add-evento">
+        {% if resultado == "error" %}
+            <p>Ha ocurrido un error, comprueba los datos introducidos</p>
+        {% endif %}
+      </div>
+      
       <form action="login.php" method="post">
         Nick:<br>
         <input type="text" name="nick" /><br>

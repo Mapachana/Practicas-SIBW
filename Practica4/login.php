@@ -7,6 +7,7 @@
 
 
     $database=Database::getInstance();
+    $variablesParaTwig = [];
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $nick = $_POST['nick'];
@@ -16,12 +17,13 @@
           session_start();
           
           $_SESSION['nickUsuario'] = $nick;  // guardo en la sesión el nick del usuario que se ha logueado
+          header("Location: index.php");
         }
-        
-        header("Location: index.php");
-        
-        exit();
+        else{
+          $variablesParaTwig['resultado'] = "error";
+        }
+  
       }
       
-      echo $twig->render('login.html', []);
+      echo $twig->render('login.html', $variablesParaTwig);
     ?>

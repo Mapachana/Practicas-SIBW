@@ -8,10 +8,17 @@
   {% block contenido %}
 
     <div class="login">
+
+      <div id="error-add-evento">
+        {% if resultado == "error" %}
+            <p>Ha ocurrido un error, no se ha podido cambiar el rol al usuario.</p>
+            <p>Compruebe el usuario y el rol, y recuerde que siempre debe haber un superusuario en el sistema</p>
+        {% endif %}
+      </div>
+
       <form action="cambiar_roles.php" method="post">
         Nombre de usuario:<br>
         <input type="text" name="username" /><br>
-        Rol actual:  <br>
         Rol nuevo:<br>
         <select name="rol">    
         <option value="registrado">registrado</option>

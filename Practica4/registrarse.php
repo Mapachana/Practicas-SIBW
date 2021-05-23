@@ -7,6 +7,7 @@
 
 
     $database=Database::getInstance();
+    $variablesParaTwig = [];
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $nick = $_POST['nick'];
@@ -27,5 +28,5 @@
         }
       }
       
-      echo $twig->render('registrarse.html', []);
+      echo $twig->render('registrarse.html', $variablesParaTwig);
     ?>

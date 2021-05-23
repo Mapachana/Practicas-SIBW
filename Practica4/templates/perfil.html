@@ -8,6 +8,13 @@
   {% block contenido %}
 
     <div class="perfil">
+      <div id="error-add-evento">
+        {% if resultado == "error" %}
+            <p>Ha ocurrido un error, no se ha podido actualizar la informacion.</p>
+            <p>Compruebe que no haya datos vacios y el usuario y email no exista</p>
+        {% endif %}
+      </div>
+
       <form action="perfil.php" method="post">
         Nick: <br>
         <input type="text" name="nick", value={{ user.username }} /><br>

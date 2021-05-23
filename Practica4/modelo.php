@@ -235,6 +235,18 @@
             $stmt->close();
         }
 
+        /* Funcion para añadir un comentario
+           */
+          public function addComentario($id, $nick, $email, $texto){
+            $consulta = "INSERT INTO Comentario (evento, autor, comentario, fecha, editado) VALUES (?, ?, ?, NOW(), false)";
+            /* stmt representa una consulta lista */
+            $stmt = $this->$mysqli->prepare($consulta);
+            $stmt->bind_param("iss", $id, $nick, $texto);
+            $stmt->execute();
+            $res=$stmt->get_result();
+            $stmt->close();
+        }
+
         /* Funcion para obtener la lista de comentarios
            Devuelve un array con eventos cada uno con: id, titulo, foto_portada */
            public function getListaComentarios(){
@@ -352,12 +364,11 @@
             $stmt->execute();
             $res=$stmt->get_result();
 
-
             if($stmt->affected_rows != -1){
-                $res = TRUE;
+                $res = true;
             }
             else{
-                $res = FALSE;
+                $res = false;
             }
 
             $stmt->close();
@@ -373,15 +384,18 @@
             $stmt->bind_param("ssss", $nick, $email, $pass, $actuser);
             $stmt->execute();
             $res=$stmt->get_result();
-            $stmt->close();
+            
 
-            if ($res->num_rows > 0){
-                $row = $res->fetch_assoc();
-            }else{
-                $row = 0;
+            if ($stmt->affected_rows != -1){
+                $res = true;
+            }
+            else{
+                debug_to_console("funciono");
+                $res = false;
             }
 
-            return $row;
+            $stmt->close();
+            return $res;
           }
 
           /* Funcion para comprobar si se puede modificar un rol de usuario verificando que siempre hay un superusuario
@@ -413,7 +427,6 @@
                 }
             }
             else{
-                $row = 0;
                 $sepuede = false;
             }
 
@@ -428,15 +441,16 @@
             $stmt->bind_param("ss", $rol, $username);
             $stmt->execute();
             $res=$stmt->get_result();
+            
+
+            if ($stmt->affected_rows != -1){
+                $res = true;
+            }else{
+                $res = false;
+            }
             $stmt->close();
 
-            if ($res->num_rows > 0){
-                $row = $res->fetch_assoc();
-            }else{
-                $row = 0;
-            }
-
-            return $row;
+            return $res;
           }
     }
 

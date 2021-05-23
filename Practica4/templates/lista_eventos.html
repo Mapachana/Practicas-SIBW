@@ -6,13 +6,15 @@
 {% endblock %}
 
 {% block contenido %}
-    <div class="lista_comentarios">
+    <div class="lista_eventos">
 
         {% for event in lista_eventos %}
-            <div class="comentario-en-lista">
+            <div class="evento-en-lista">
                 <a href="editar_evento.php?ev={{ event.id }}">
+                    <img src={{ event.foto_portada }}>
+                </a>
+                <a href="editar_evento.php?ev={{ event.id }}"> 
                     <h4>{{ event.titulo }}</h4>
-                    
                 </a>
             </div>
         {% endfor %}

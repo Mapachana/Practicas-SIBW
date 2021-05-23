@@ -21,11 +21,26 @@
       $email = $_POST['email'];
       $pass = $_POST['contraseña'];
 
-      // Actualizo el user
-      $database->actualizarUser($_SESSION['nickUsuario'], $nick, $email, password_hash($pass, PASSWORD_DEFAULT));
+      if($nick != "" && $email != "" && $pass != ""){
+        // Actualizo el user
+        $res = $database->actualizarUser($_SESSION['nickUsuario'], $nick, $email, password_hash($pass, PASSWORD_DEFAULT));
+        if($res){
+          $variablesParaTwig['resultado'] = "insertado";
+          // Actualizo el user de la pagina
+          $variablesParaTwig['user'] = $database->getUser($nick);
+          header("Location: index.php");
+          
+        }
+        else{
+            $variablesParaTwig['resultado'] = "error";
+        }
 
-      // Actualizo el user
-      $variablesParaTwig['user'] = $database->getUser($nick);
+      }
+      else{
+        $variablesParaTwig['resultado'] = "error";
+      }
+      
+      
 
     }
 

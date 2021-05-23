@@ -26,10 +26,16 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $texto = $_POST['texto'];
 
-      // Actualizo el comentario
-      $database->actualizarComentario($idCm, $texto);
+      if ($texto != ""){
+        // Actualizo el comentario
+        $database->actualizarComentario($idCm, $texto);
 
-      header("Location: evento.php?ev=$evento");
+        header("Location: evento.php?ev=$evento");
+      }
+      else{
+        $variablesParaTwig['resultado'] = "error";
+      }
+      
     }
 
       echo $twig->render('editar_comentario.html', $variablesParaTwig);

@@ -8,6 +8,14 @@
   {% block contenido %}
 
   <div class ="comentario-editar">
+    <div id="error-add-evento">
+      {% if resultado == "error" %}
+          <p>Ha ocurrido un error, no se ha podido actualizar el comentario.</p>
+          <p>Asegurate de que el comentario no sea vacio</p>
+      {% endif %}
+    </div>
+
+
     <h4>{{ comentario.autor }} {{ comentario.fecha }}</h4>
     <form action="editar_comentario.php?cm={{ comentario.id }}" method="post">
       Texto del comentario: <br>

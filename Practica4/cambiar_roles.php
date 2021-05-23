@@ -23,9 +23,11 @@
       // Compruebo si al usuario le puedo quitar el rol de superusuario en caso de ser superusuario
     if ($database->quitarSuperusuario($username)){
       $database->actualizarRol($username, $rol);
-    }
-
       header("Location: index.php");
+    }
+    else{
+      $variablesParaTwig['resultado'] = "error";
+    } 
     }
 
       echo $twig->render('cambiar_roles.html', $variablesParaTwig);
