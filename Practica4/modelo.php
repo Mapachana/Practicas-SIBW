@@ -103,6 +103,30 @@
             $stmt->close();
         }
 
+        /* Funcion para buscar un evento */
+        public function buscarEvento($texto){
+            $consulta = "SELECT id, titulo, foto_portada FROM Evento WHERE descripcion LIKE ?";
+            /* stmt representa una consulta lista */
+            $stmt = $this->$mysqli->prepare($consulta);
+            $busqueda = "%" . $texto . "%";
+            $stmt->bind_param("s", $busqueda);
+            $stmt->execute();
+            $res=$stmt->get_result();
+            $stmt->close();
+        
+            $evento = array('id' => '-1', 'titulo' => 'Evento', 'foto_portada' => './img/dice.png');
+
+            $lista_eventos = array();
+            
+            /* Para cada evento obtenido obtengo sus fotos y pongo la primera en la portada */
+            while($row=$res->fetch_assoc()){
+                $evento = array('id' => $row['id'], 'titulo' => $row['titulo'], 'foto_portada' => $row['foto_portada']);  
+                $lista_eventos[] = $evento;
+            }
+            
+            return $lista_eventos;
+        }
+
         /* Funcion para añadir fotos a un evento */
         public function addImagenEvento($id, $foto){
             $consulta = "INSERT INTO Imagenes (ruta, evento) VALUES (?, ?)";
@@ -258,6 +282,28 @@
             $stmt->close();
         
             //$evento = array('id' => '-1', 'titulo' => 'Evento', 'foto_portada' => './img/dice.png');
+
+            $lista_comentarios = array();
+            
+            /* Para cada evento obtenido obtengo sus fotos y pongo la primera en la portada */
+            while($row=$res->fetch_assoc()){
+                $comentario = array('id' => $row['id'], 'autor' => $row['autor'], 'comentario' => $row['comentario'], 'fecha' => $row['fecha'], 'evento' => $row['evento'], 'editado' => $row['editado']);  
+                $lista_comentarios[] = $comentario;
+            }
+            
+            return $lista_comentarios;
+        }
+
+        /* Funcion para buscar un comentario */
+        public function buscarComentario($texto){
+            $consulta = "SELECT * FROM Comentario WHERE comentario LIKE ?";
+            /* stmt representa una consulta lista */
+            $stmt = $this->$mysqli->prepare($consulta);
+            $busqueda = "%" . $texto . "%";
+            $stmt->bind_param("s", $busqueda);
+            $stmt->execute();
+            $res=$stmt->get_result();
+            $stmt->close();
 
             $lista_comentarios = array();
             

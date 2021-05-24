@@ -8,6 +8,12 @@
 {% block contenido %}
     <div class="lista_eventos">
 
+        <div id="error-add-evento">
+            {% if resultado == "error" %}
+                <p>La búsqueda no obtuvo ningún resultado, pruebe de nuevo</p>
+            {% endif %}
+          </div>
+
         {% for event in lista_eventos %}
             <div class="evento-en-lista">
                 <a href="editar_evento.php?ev={{ event.id }}">

@@ -8,6 +8,12 @@
 {% block contenido %}
     <div class="lista_comentarios">
 
+        <div id="error-add-evento">
+            {% if resultado == "error" %}
+                <p>La búsqueda no obtuvo ningún resultado, pruebe de nuevo</p>
+            {% endif %}
+          </div>
+
         {% for coment in lista_comentarios %}
             <div class="comentario-en-lista">
                 <a href="editar_comentario.php?cm={{ coment.id }}">

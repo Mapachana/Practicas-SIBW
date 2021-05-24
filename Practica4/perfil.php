@@ -28,6 +28,7 @@
           $variablesParaTwig['resultado'] = "insertado";
           // Actualizo el user de la pagina
           $variablesParaTwig['user'] = $database->getUser($nick);
+          $_SESSION['nickUsuario'] = $nick;
           header("Location: index.php");
           
         }
