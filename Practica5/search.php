@@ -7,21 +7,25 @@
   $twig   = new \Twig\Environment($loader);
 
   $database = Database::getInstance();
+  $variablesParaTwig = [];
 
   session_start();
     
-    if (isset($_SESSION['nickUsuario'])) {
-        $variablesParaTwig['user'] = $database->getUser($_SESSION['nickUsuario']);
-    }
+  if (isset($_SESSION['nickUsuario'])) {
+    $variablesParaTwig['user'] = $database->getUser($_SESSION['nickUsuario']);
 
-    if(isset($_POST['consulta'])){
-      $database->consultarEventos($_POST['consulta']);
-      //$lista_eventos = $database->consultarEvento($_POST['consulta']);
-      //  echo $twig->render("lista_eventos.html", ['lista_eventos' => $lista_eventos]);
-    }
+  }
+  else{
+    $variablesParaTwig['user'] = ['rol' => 'anonimo'];
+  }
 
-    if(isset($_GET['prueba'])){
-    echo $database->consultarEventos($_GET['prueba']);
-    }
+  if(isset($_POST['consulta'])){
+    $variablesParaTwig['lista_eventos'] = $database->consultarEventos($_POST['consulta'], $variablesParaTwig['user']['rol']);
+    echo $twig->render("lista.html", $variablesParaTwig);
+  }
+
+  if(isset($_GET['prueba'])){
+  echo $database->consultarEventos($_GET['prueba']);
+  }
 
 ?>

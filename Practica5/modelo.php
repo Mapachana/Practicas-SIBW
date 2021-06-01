@@ -526,9 +526,17 @@
 
         /* Funcion para consultar eventos que tienen "nombre" en el titulo
           Devuelve una lista de eventos */
-        function consultarEventos($nombre){
+        function consultarEventos($nombre, $rol){
             if(isset($nombre)){
-                $consulta = "SELECT * FROM Evento WHERE titulo LIKE ?";
+                debug_to_console($rol);
+                $consulta = "";
+                if($rol == 'gestor' || $rol == 'superusuario'){
+                    $consulta = "SELECT * FROM Evento WHERE titulo LIKE ?";
+                }
+                else{
+                    $consulta = "SELECT * FROM Evento WHERE titulo LIKE ? AND publicado=true";
+                }
+                debug_to_console($consulta);
                 $stmt = $this->$mysqli->prepare($consulta);
                 $busqueda = "%" . $nombre . "%";
                 $stmt->bind_param("s", $busqueda);
@@ -537,20 +545,14 @@
 
                 $lista_eventos = array();
 
-                $salida = '<ul class="list-unstyled">';
                 if ($res->num_rows > 0){
                     while($row = $res->fetch_assoc()){
                         $lista_eventos[] = ['id' => $row['id'], 'titulo' => $row['titulo']];
-                        $salida .= "<li>" . $row['titulo'] . "</li>";
                     }
                 }
                 $stmt->close();
 
-                $salida .= "</ul>";
-
-                echo $salida;
-                return $salida;
-                //return $lista_eventos;
+                return $lista_eventos;
             }
         }
     }

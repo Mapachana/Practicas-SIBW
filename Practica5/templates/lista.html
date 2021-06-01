@@ -1,0 +1,10 @@
+
+<ul class="list-unstyled">
+    {% if lista_eventos %}
+        {% for fila in lista_eventos %}
+           <a href="evento.php?ev={{ fila.id }}"> <li> {{ fila.titulo }}</li> </a> 
+        {% endfor %}
+    {% else %}           
+        <li> No se ha encontrado ninguna coincidencia </li>
+    {% endif %}
+</ul>

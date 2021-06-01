@@ -73,8 +73,8 @@ CREATE TABLE Usuario(
 
 /* Añadimos algunos elementos por defecto a cada tabla */
 
-INSERT INTO Evento(titulo, lugar, descripcion, organizador, fecha, foto_portada, enlace, publicado) VALUES('Partida de DyD','Sótano de Dani','Comenzamos nueva campaña de dyd con Dani como master. Hay pizza! Pasaos por la primera sesion', 'Dani', NOW(), './img/dice.png', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstleyVEVO', true);
-INSERT INTO Evento(titulo, lugar, descripcion, organizador, fecha, foto_portada, enlace, publicado) VALUES('Partida de Vampiro','Discord','Nos acercamos al final de la campaña de vampiro la mascarada, la proxima sesion va a ser intensa', 'Greevilr', NOW(), './img/dice2.png', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstleyVEVO', true);
+INSERT INTO Evento(titulo, lugar, descripcion, organizador, fecha, foto_portada, enlace, publicado) VALUES('Partida de rol de DyD','Sótano de Dani','Comenzamos nueva campaña de dyd con Dani como master. Hay pizza! Pasaos por la primera sesion', 'Dani', NOW(), './img/dice.png', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstleyVEVO', true);
+INSERT INTO Evento(titulo, lugar, descripcion, organizador, fecha, foto_portada, enlace, publicado) VALUES('Partida de rol de Vampiro','Discord','Nos acercamos al final de la campaña de vampiro la mascarada, la proxima sesion va a ser intensa', 'Greevilr', NOW(), './img/dice2.png', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstleyVEVO', true);
 INSERT INTO Evento(titulo, lugar, descripcion, organizador, fecha, foto_portada, publicado) VALUES('Nuevo rol','Discord','Abrimos campaña de vampiro!! Hay vacantes, asistid a la sesion 0 para ver si os interesa', 'Santi', NOW(), './img/anya.png', false);
 
 INSERT INTO Imagenes(ruta, evento, pie) VALUES('./img/dice.png', 1, 'un dado apañao');
