@@ -1,0 +1,30 @@
+{% extends "plantilla.html" %}
+
+{% block informacion %}
+    <title>Login</title>
+    <link rel="stylesheet" href="./css/estilo.css">
+{% endblock %}
+
+  {% block contenido %}
+
+    <div class="perfil">
+      <div id="error-add-evento">
+        {% if resultado == "error" %}
+            <p>Ha ocurrido un error, no se ha podido actualizar la informacion.</p>
+            <p>Compruebe que no haya datos vacios y el usuario y email no exista</p>
+        {% endif %}
+      </div>
+
+      <form action="perfil.php" method="post">
+        Nick: <br>
+        <input type="text" name="nick", value={{ user.username }} /><br>
+        Email: <br>
+        <input type="email" name="email", value={{ user.email }} /><br>
+        Password: Debe introducir la antigua para cambiar otros datos o la nueva<br>
+        <input type="password" name="contraseña"/><br>
+        <input type="submit" value="Cambiar datos" />
+      </form>
+    </div>
+
+  {% endblock %}
+

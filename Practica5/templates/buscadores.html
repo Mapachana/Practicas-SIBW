@@ -1,0 +1,33 @@
+{% extends "plantilla.html" %}
+
+{% block informacion %}
+    <title>Login</title>
+    <link rel="stylesheet" href="./css/estilo.css">
+{% endblock %}
+
+  {% block contenido %}
+
+    {% if user.rol == 'moderador' or user.rol == 'gestor' or user.rol == 'superusuario' %}
+      <div class="login">
+        <h2>Buscadores de la práctica 4</h2>
+        <h3>Buscador de comentarios</h3>
+        <form action="buscar_comentarios.php" method="post">
+          Comentario:<br>
+          <input type="text" name="busq_com" /><br>
+          <input type="submit" value="Buscar" />
+        </form>
+
+        {% if user.rol == 'gestor' or user.rol == 'superusuario' %}
+          <h3>Buscador de eventos</h3>
+          <form action="buscar_eventos.php" method="post">
+            Evento:<br>
+            <input type="text" name="busq_event" /><br>
+            <input type="submit" value="Buscar" />
+          </form>
+        {% endif %}
+
+      </div>
+    {% endif %}
+
+  {% endblock %}
+

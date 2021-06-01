@@ -1,0 +1,31 @@
+{% extends "plantilla.html" %}
+
+{% block informacion %}
+    <title>Login</title>
+    <link rel="stylesheet" href="./css/estilo.css">
+{% endblock %}
+
+  {% block contenido %}
+
+    <div class="login">
+
+      <div id="error-add-evento">
+        {% if resultado == "error" %}
+            <p>Ha ocurrido un error, comprueba los datos introducidos</p>
+        {% endif %}
+      </div>
+      
+      <form action="registrarse.php" method="post">
+        Nick:<br>
+        <input type="text" name="nick" /><br>
+        Email:<br>
+        <input type="text" name="email" /><br>
+        Password:<br>
+        <input type="password" name="contraseña" /><br>
+        <input type="submit" value="Login" />
+      </form>
+
+    </div>
+
+  {% endblock %}
+

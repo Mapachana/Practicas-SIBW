@@ -40,7 +40,7 @@
             if ($res->num_rows > 0) {
                 $row = $res->fetch_assoc();
                 
-                $evento = array('id' => $row['id'], 'titulo' => $row['titulo'], 'lugar' => $row['lugar'], 'descripcion' => $row['descripcion'], 'organizador' => $row['organizador'], 'fecha' => $row['fecha'], 'enlace' => $row['enlace'], 'etiquetas' => $row['etiquetas']);
+                $evento = array('id' => $row['id'], 'titulo' => $row['titulo'], 'lugar' => $row['lugar'], 'descripcion' => $row['descripcion'], 'organizador' => $row['organizador'], 'fecha' => $row['fecha'], 'enlace' => $row['enlace'], 'etiquetas' => $row['etiquetas'], 'publicado' => $row['publicado']);
             }
             
             return $evento;
@@ -49,7 +49,7 @@
         /* Funcion para añadir un evento nuevo
             Devuelve el resultado del evento*/
         public function addEvento($titulo, $organizador, $fecha, $lugar, $descripcion, $enlace, $etiquetas, $file_name){
-            $consulta = "INSERT INTO Evento (titulo, organizador, fecha, lugar, descripcion, enlace, etiquetas, foto_portada) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $consulta = "INSERT INTO Evento (titulo, organizador, fecha, lugar, descripcion, enlace, etiquetas, foto_portada, publicado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, false)";
             /* stmt representa una consulta lista */
             $ruta_imagen = "./img/".$file_name;
             $stmt = $this->$mysqli->prepare($consulta);
@@ -71,12 +71,19 @@
 
          /* Funcion para añadir un evento nuevo
             Devuelve el resultado del evento*/
-        public function updateEvento($id, $titulo, $organizador, $fecha, $lugar, $descripcion, $enlace, $etiquetas, $file_name){
-            $consulta = "UPDATE Evento SET titulo=?, organizador=?, fecha=?, lugar=?, descripcion=?, enlace=?, etiquetas=?, foto_portada=? WHERE id=?";
+        public function updateEvento($id, $titulo, $organizador, $fecha, $lugar, $descripcion, $enlace, $etiquetas, $file_name, $publicado){
+            $consulta = "UPDATE Evento SET titulo=?, organizador=?, fecha=?, lugar=?, descripcion=?, enlace=?, etiquetas=?, foto_portada=?, publicado=? WHERE id=?";
             /* stmt representa una consulta lista */
+            debug_to_console($publicado);
+            if($publicado == "true"){
+                $publicado_cons = 1;
+            }
+            else{
+                $publicado_cons = 0;
+            }
             $ruta_imagen = "./img/".$file_name;
             $stmt = $this->$mysqli->prepare($consulta);
-            $stmt->bind_param("sssssssss", $titulo, $organizador, $fecha, $lugar, $descripcion, $enlace, $etiquetas, $ruta_imagen, $id);
+            $stmt->bind_param("ssssssssis", $titulo, $organizador, $fecha, $lugar, $descripcion, $enlace, $etiquetas, $ruta_imagen, $publicado_cons, $id);
             $stmt->execute();
             $res=$stmt->get_result();
 
@@ -105,7 +112,7 @@
 
         /* Funcion para buscar un evento */
         public function buscarEvento($texto){
-            $consulta = "SELECT id, titulo, foto_portada FROM Evento WHERE descripcion LIKE ?";
+            $consulta = "SELECT id, titulo, foto_portada, publicado FROM Evento WHERE descripcion LIKE ?";
             /* stmt representa una consulta lista */
             $stmt = $this->$mysqli->prepare($consulta);
             $busqueda = "%" . $texto . "%";
@@ -114,13 +121,13 @@
             $res=$stmt->get_result();
             $stmt->close();
         
-            $evento = array('id' => '-1', 'titulo' => 'Evento', 'foto_portada' => './img/dice.png');
+            $evento = array('id' => '-1', 'titulo' => 'Evento', 'foto_portada' => './img/dice.png', 'publicado' => 'true');
 
             $lista_eventos = array();
             
             /* Para cada evento obtenido obtengo sus fotos y pongo la primera en la portada */
             while($row=$res->fetch_assoc()){
-                $evento = array('id' => $row['id'], 'titulo' => $row['titulo'], 'foto_portada' => $row['foto_portada']);  
+                $evento = array('id' => $row['id'], 'titulo' => $row['titulo'], 'foto_portada' => $row['foto_portada'], 'publicado' => $row['publicado']);  
                 $lista_eventos[] = $evento;
             }
             
@@ -312,10 +319,10 @@
             return $lista_comentarios;
         }
 
-        /* Funcion para obtener la lista de eventos 
+        /* Funcion para obtener la lista de eventos publicados
            Devuelve un array con eventos cada uno con: id, titulo, foto_portada */
         public function getListaEventos(){
-            $consulta = "SELECT id, titulo, foto_portada FROM Evento";
+            $consulta = "SELECT id, titulo, foto_portada FROM Evento WHERE publicado = true";
             /* stmt representa una consulta lista */
             $stmt = $this->$mysqli->prepare($consulta);
             $stmt->execute();
@@ -329,6 +336,29 @@
             /* Para cada evento obtenido obtengo sus fotos y pongo la primera en la portada */
             while($row=$res->fetch_assoc()){
                 $evento = array('id' => $row['id'], 'titulo' => $row['titulo'], 'foto_portada' => $row['foto_portada']);  
+                $lista_eventos[] = $evento;
+            }
+            
+            return $lista_eventos;
+        }
+
+        /* Funcion para obtener la lista de eventos publicados y no publicados
+           Devuelve un array con eventos cada uno con: id, titulo, foto_portada, publicado */
+           public function getListaEventosGestor(){
+            $consulta = "SELECT id, titulo, foto_portada, publicado FROM Evento";
+            /* stmt representa una consulta lista */
+            $stmt = $this->$mysqli->prepare($consulta);
+            $stmt->execute();
+            $res=$stmt->get_result();
+            $stmt->close();
+        
+            $evento = array('id' => '-1', 'titulo' => 'Evento', 'foto_portada' => './img/dice.png', 'publicado' => 'true');
+
+            $lista_eventos = array();
+            
+            /* Para cada evento obtenido obtengo sus fotos y pongo la primera en la portada */
+            while($row=$res->fetch_assoc()){
+                $evento = array('id' => $row['id'], 'titulo' => $row['titulo'], 'foto_portada' => $row['foto_portada'], 'publicado' => $row['publicado']);  
                 $lista_eventos[] = $evento;
             }
             
@@ -493,6 +523,36 @@
 
             return $res;
           }
+
+        /* Funcion para consultar eventos que tienen "nombre" en el titulo
+          Devuelve una lista de eventos */
+        function consultarEventos($nombre){
+            if(isset($nombre)){
+                $consulta = "SELECT * FROM Evento WHERE titulo LIKE ?";
+                $stmt = $this->$mysqli->prepare($consulta);
+                $busqueda = "%" . $nombre . "%";
+                $stmt->bind_param("s", $busqueda);
+                $stmt->execute();
+                $res=$stmt->get_result();
+
+                $lista_eventos = array();
+
+                $salida = '<ul class="list-unstyled">';
+                if ($res->num_rows > 0){
+                    while($row = $res->fetch_assoc()){
+                        $lista_eventos[] = ['id' => $row['id'], 'titulo' => $row['titulo']];
+                        $salida .= "<li>" . $row['titulo'] . "</li>";
+                    }
+                }
+                $stmt->close();
+
+                $salida .= "</ul>";
+
+                echo $salida;
+                return $salida;
+                //return $lista_eventos;
+            }
+        }
     }
 
     function debug_to_console($data) {

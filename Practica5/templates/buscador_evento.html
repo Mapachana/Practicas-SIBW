@@ -1,0 +1,26 @@
+{% extends "plantilla.html" %}
+
+{% block informacion %}
+    <title>Login</title>
+    <link rel="stylesheet" href="./css/estilo.css">
+    <!-- Enlazo con AJAX -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <!-- Cargo javascript-->
+    <script type="text/javascript" src="./java/script.js" defer></script>
+
+{% endblock %}
+
+  {% block contenido %}
+      <div class="buscador">
+        <h2>Buscador de la práctica 5</h2>
+        <label>Evento:</label><br>
+        <input type="text" name="evento", id="evento", class="form-control", placeholder="Nombre del evento" /><br>
+
+        <div id="listaEventos">
+
+        </div>
+
+      </div>
+
+  {% endblock %}
+

@@ -35,6 +35,7 @@
       $descripcion = $_POST['descr'];
       $enlace = $_POST['enlace'];
       $etiquetas = $_POST['etiquetas'];
+      $publicado = $_POST['publicado'];
       
       // Cargo imagen principal
       if(isset($_FILES['imagen'])){
@@ -60,7 +61,7 @@
             
             $variablesParaTwig['imagen'] = "img/" . $file_name;
 
-            $res = $database->updateEvento($idEV, $titulo, $organizador, $fecha, $lugar, $descripcion, $enlace, $etiquetas, $file_name);
+            $res = $database->updateEvento($idEV, $titulo, $organizador, $fecha, $lugar, $descripcion, $enlace, $etiquetas, $file_name, $publicado);
             if($res){
                 $variablesParaTwig['resultado'] = "insertado";
             }
