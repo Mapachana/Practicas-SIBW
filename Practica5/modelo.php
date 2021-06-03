@@ -74,7 +74,6 @@
         public function updateEvento($id, $titulo, $organizador, $fecha, $lugar, $descripcion, $enlace, $etiquetas, $file_name, $publicado){
             $consulta = "UPDATE Evento SET titulo=?, organizador=?, fecha=?, lugar=?, descripcion=?, enlace=?, etiquetas=?, foto_portada=?, publicado=? WHERE id=?";
             /* stmt representa una consulta lista */
-            debug_to_console($publicado);
             if($publicado == "true"){
                 $publicado_cons = 1;
             }
@@ -531,7 +530,6 @@
           Devuelve una lista de eventos */
         function consultarEventos($nombre, $rol){
             if(isset($nombre)){
-                debug_to_console($rol);
                 $consulta = "";
                 if($rol == 'gestor' || $rol == 'superusuario'){
                     $consulta = "SELECT * FROM Evento WHERE titulo LIKE ?";
@@ -539,7 +537,6 @@
                 else{
                     $consulta = "SELECT * FROM Evento WHERE titulo LIKE ? AND publicado=true";
                 }
-                debug_to_console($consulta);
                 $stmt = $this->$mysqli->prepare($consulta);
                 $busqueda = "%" . $nombre . "%";
                 $stmt->bind_param("s", $busqueda);
