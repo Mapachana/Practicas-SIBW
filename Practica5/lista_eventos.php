@@ -17,6 +17,9 @@
     if (isset($_SESSION['nickUsuario'])) {
         $variablesParaTwig['user'] = $database->getUser($_SESSION['nickUsuario']);
     }
+    if($variablesParaTwig['user']['rol'] != 'gestor' && $variablesParaTwig['user']['rol'] != 'superusuario'){
+        header("Location: index.php");
+    }
 
     echo $twig->render('lista_eventos.html', $variablesParaTwig);
 ?>

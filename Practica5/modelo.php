@@ -25,7 +25,7 @@
         }
 
         /* Funcion para obtener un evento por su identificador 
-           Devuelve un array con: id, titulo, lugar, descripcion, organizador, fecha, enlace, etiquetas */
+           Devuelve un array con: id, titulo, lugar, descripcion, organizador, fecha, enlace, etiquetas, publicado */
         public function getEvento($idEv){
             $consulta = "SELECT * FROM Evento WHERE id=?";
             /* stmt representa una consulta lista */
@@ -35,7 +35,7 @@
             $res=$stmt->get_result();
             $stmt->close();
         
-            $evento = array('id' => '-1', 'titulo' => '¡Ups! Este evento no existe :(', 'lugar' => 'XXX', 'descripcion' => 'XXX', 'organizador' => 'XXX', 'fecha' => 'XXX', 'enlace' => '', 'etiquetas' => '');
+            $evento = array('id' => '-1', 'titulo' => '¡Ups! Este evento no existe :(', 'lugar' => 'XXX', 'descripcion' => 'XXX', 'organizador' => 'XXX', 'fecha' => 'XXX', 'enlace' => '', 'etiquetas' => '', 'publicado' => true);
             
             if ($res->num_rows > 0) {
                 $row = $res->fetch_assoc();
@@ -69,7 +69,7 @@
             return $res;
         }
 
-         /* Funcion para añadir un evento nuevo
+         /* Funcion para actualizar un evento
             Devuelve el resultado del evento*/
         public function updateEvento($id, $titulo, $organizador, $fecha, $lugar, $descripcion, $enlace, $etiquetas, $file_name, $publicado){
             $consulta = "UPDATE Evento SET titulo=?, organizador=?, fecha=?, lugar=?, descripcion=?, enlace=?, etiquetas=?, foto_portada=?, publicado=? WHERE id=?";
@@ -110,7 +110,8 @@
             $stmt->close();
         }
 
-        /* Funcion para buscar un evento */
+        /* Funcion para buscar un evento en el buscador de la P4
+           Devuelve una lista de eventos que coinciden con la busqueda */
         public function buscarEvento($texto){
             $consulta = "SELECT id, titulo, foto_portada, publicado FROM Evento WHERE descripcion LIKE ?";
             /* stmt representa una consulta lista */
@@ -178,6 +179,7 @@
             
             return $lista_imagenes;
         }
+
         /* Funcion para borrar todas las fotos asociadas a un evento */
         public function borrarImagenesEvento($id){
             $consulta = "DELETE FROM Imagenes WHERE evento=?";
@@ -190,7 +192,7 @@
         }
 
         /* Funcion para obtener los comentarios de un evento 
-           Devuelve un array con comentarios cada uno con: id, autor, comentario, fecha */
+           Devuelve un array con comentarios cada uno con: id, autor, comentario, fecha, editado */
         public function getComentariosEvento($idEv){
             $consulta = "SELECT * FROM Comentario WHERE evento=?";
             /* stmt representa una consulta lista */
@@ -211,7 +213,7 @@
         }
 
         /* Funcion para obtener un comentario por su identificador 
-           Devuelve un array con: id, autor, comentario, fecha, evento  */
+           Devuelve un array con: id, autor, comentario, fecha, evento, editado  */
            public function getComentario($idCm){
             $consulta = "SELECT * FROM Comentario WHERE id=?";
             /* stmt representa una consulta lista */
@@ -277,7 +279,7 @@
         }
 
         /* Funcion para obtener la lista de comentarios
-           Devuelve un array con eventos cada uno con: id, titulo, foto_portada */
+           Devuelve un array con comentarios con su id, autor, comentario, fecha, evento, editado */
            public function getListaComentarios(){
             $consulta = "SELECT * FROM Comentario";
             /* stmt representa una consulta lista */
@@ -297,7 +299,8 @@
             return $lista_comentarios;
         }
 
-        /* Funcion para buscar un comentario */
+        /* Funcion para buscar un comentario en el buscador de la P4
+           Devuelve un array con los comentarios que coinciden con la busqueda*/
         public function buscarComentario($texto){
             $consulta = "SELECT * FROM Comentario WHERE comentario LIKE ?";
             /* stmt representa una consulta lista */
@@ -524,7 +527,7 @@
             return $res;
           }
 
-        /* Funcion para consultar eventos que tienen "nombre" en el titulo
+        /* Funcion para consultar eventos que tienen "nombre" en el titulo para el buscador de la P5
           Devuelve una lista de eventos */
         function consultarEventos($nombre, $rol){
             if(isset($nombre)){

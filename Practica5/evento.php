@@ -15,18 +15,24 @@
     $variablesParaTwig = [];
 
     $database=Database::getInstance();
-
-    $variablesParaTwig['evento'] = $database->getEvento($idEV);
-    $variablesParaTwig['lista_imagenes'] = $database->getFotosEvento($idEV);
-    $variablesParaTwig['lista_comentarios'] = $database->getComentariosEvento($idEV);
-    $variablesParaTwig['lista_palabras'] = $database->getPalabrasProhibidas();
-
   
     session_start();
     
+    $variablesParaTwig['evento'] = $database->getEvento($idEV);
+
     if (isset($_SESSION['nickUsuario'])) {
         $variablesParaTwig['user'] = $database->getUser($_SESSION['nickUsuario']);
     }
+     // Si el evento no está publicado y no soy gestor o superusuario no puedo verlo
+    if($variablesParaTwig['evento']['publicado'] != '1' && $variablesParaTwig['user']['rol'] != 'gestor' && $variablesParaTwig['user']['rol'] != 'superusuario'){
+        $idEV = -1;
+        $variablesParaTwig['evento'] = $database->getEvento($idEV);
+    }
+
+
+    $variablesParaTwig['lista_imagenes'] = $database->getFotosEvento($idEV);
+    $variablesParaTwig['lista_comentarios'] = $database->getComentariosEvento($idEV);
+    $variablesParaTwig['lista_palabras'] = $database->getPalabrasProhibidas();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $texto = $_POST['texto'];

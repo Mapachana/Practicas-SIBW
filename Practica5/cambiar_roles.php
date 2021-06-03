@@ -15,6 +15,9 @@
     if (isset($_SESSION['nickUsuario'])) {
         $variablesParaTwig['user'] = $database->getUser($_SESSION['nickUsuario']);
     }
+    if($variablesParaTwig['user']['rol'] != 'superusuario'){
+      header("Location: index.php");
+    }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $username = $_POST['username'];

@@ -15,6 +15,9 @@
     if (isset($_SESSION['nickUsuario'])) {
         $variablesParaTwig['user'] = $database->getUser($_SESSION['nickUsuario']);
     }
+    if($variablesParaTwig['user']['rol'] != 'gestor' && $variablesParaTwig['user']['rol'] != 'superusuario'){
+        header("Location: index.php");
+    }
 
     if(isset($_GET['ev']) && is_numeric($_GET['ev']) ){
         $idEV = $_GET['ev'];
